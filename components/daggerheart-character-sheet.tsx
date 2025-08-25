@@ -6,13 +6,7 @@ import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
 import { Badge } from "@/components/ui/badge"
-import {
-  Select,
-  SelectContent,
-  SelectItem,
-  SelectTrigger,
-  SelectValue,
-} from "@/components/ui/select"
+import { MobileSelect, SelectItem } from "@/components/mobile-select"
 import {
   Dice1,
   Dice2,
@@ -1301,47 +1295,50 @@ export function DaggerheartCharacterSheet() {
             <div className="space-y-4">
               {/* Filter Controls */}
               <div className="grid grid-cols-2 gap-2 md:grid-cols-4">
-                <Select value={domainFilter} onValueChange={setDomainFilter}>
-                  <SelectTrigger className="cyber-input">
-                    <SelectValue placeholder="All Domains" />
-                  </SelectTrigger>
-                  <SelectContent>
-                    <SelectItem value="all">All Domains</SelectItem>
-                    {uniqueDomains.map((domain) => (
-                      <SelectItem key={domain} value={domain}>
-                        {domain}
-                      </SelectItem>
-                    ))}
-                  </SelectContent>
-                </Select>
+                <MobileSelect
+                  value={domainFilter}
+                  onValueChange={setDomainFilter}
+                  placeholder="All Domains"
+                  title="Select Domain"
+                  triggerClassName="cyber-input"
+                >
+                  <SelectItem value="all">All Domains</SelectItem>
+                  {uniqueDomains.map((domain) => (
+                    <SelectItem key={domain} value={domain}>
+                      {domain}
+                    </SelectItem>
+                  ))}
+                </MobileSelect>
 
-                <Select value={levelFilter} onValueChange={setLevelFilter}>
-                  <SelectTrigger className="cyber-input">
-                    <SelectValue placeholder="All Levels" />
-                  </SelectTrigger>
-                  <SelectContent>
-                    <SelectItem value="all">All Levels</SelectItem>
-                    {uniqueLevels.map((level) => (
-                      <SelectItem key={level} value={level.toString()}>
-                        Level {level}
-                      </SelectItem>
-                    ))}
-                  </SelectContent>
-                </Select>
+                <MobileSelect
+                  value={levelFilter}
+                  onValueChange={setLevelFilter}
+                  placeholder="All Levels"
+                  title="Select Level"
+                  triggerClassName="cyber-input"
+                >
+                  <SelectItem value="all">All Levels</SelectItem>
+                  {uniqueLevels.map((level) => (
+                    <SelectItem key={level} value={level.toString()}>
+                      Level {level}
+                    </SelectItem>
+                  ))}
+                </MobileSelect>
 
-                <Select value={typeFilter} onValueChange={setTypeFilter}>
-                  <SelectTrigger className="cyber-input">
-                    <SelectValue placeholder="All Types" />
-                  </SelectTrigger>
-                  <SelectContent>
-                    <SelectItem value="all">All Types</SelectItem>
-                    {uniqueTypes.map((type) => (
-                      <SelectItem key={type} value={type}>
-                        {type}
-                      </SelectItem>
-                    ))}
-                  </SelectContent>
-                </Select>
+                <MobileSelect
+                  value={typeFilter}
+                  onValueChange={setTypeFilter}
+                  placeholder="All Types"
+                  title="Select Type"
+                  triggerClassName="cyber-input"
+                >
+                  <SelectItem value="all">All Types</SelectItem>
+                  {uniqueTypes.map((type) => (
+                    <SelectItem key={type} value={type}>
+                      {type}
+                    </SelectItem>
+                  ))}
+                </MobileSelect>
 
                 <Input
                   placeholder="Search cards..."
