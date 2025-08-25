@@ -1,0 +1,391 @@
+export interface WeaponData {
+  name: string
+  category: "Primary" | "Secondary"
+  hands: "One-Handed" | "Two-Handed" | "Versatile"
+  ranges: string[] // e.g., ["Melee", "Very Close"] or ["Ranged", "Far"]
+  damage: {
+    primary: string // e.g., "d6", "d8", "d10", "d12"
+    versatile?: string // for versatile weapons
+  }
+  traits: string[] // e.g., ["Nimble", "Brutal", "Reliable", "Sharp"]
+  tier?: number
+  description?: string
+}
+
+export const DAGGERHEART_WEAPONS: WeaponData[] = [
+  // Tier 1 Melee Weapons
+  {
+    name: "Broadsword",
+    category: "Primary",
+    hands: "One-Handed",
+    ranges: ["Melee", "Very Close"],
+    damage: { primary: "d8" },
+    traits: ["Reliable"],
+    tier: 1,
+    description: "+1 to attack rolls"
+  },
+  {
+    name: "Longsword",
+    category: "Primary",
+    hands: "Two-Handed",
+    ranges: ["Melee", "Very Close"],
+    damage: { primary: "d10+3" },
+    traits: [],
+    tier: 1
+  },
+  {
+    name: "Battleaxe",
+    category: "Primary",
+    hands: "Two-Handed",
+    ranges: ["Melee", "Very Close"],
+    damage: { primary: "d10+3" },
+    traits: [],
+    tier: 1
+  },
+  {
+    name: "Greatsword",
+    category: "Primary",
+    hands: "Two-Handed",
+    ranges: ["Melee", "Very Close"],
+    damage: { primary: "d10+3" },
+    traits: ["Massive"],
+    tier: 1,
+    description: "-1 to Evasion; on a successful attack, roll an additional damage die and discard the lowest result."
+  },
+  {
+    name: "Mace",
+    category: "Primary",
+    hands: "One-Handed",
+    ranges: ["Melee", "Very Close"],
+    damage: { primary: "d8+1" },
+    traits: [],
+    tier: 1
+  },
+  {
+    name: "Warhammer",
+    category: "Primary",
+    hands: "Two-Handed",
+    ranges: ["Melee", "Very Close"],
+    damage: { primary: "d12+3" },
+    traits: ["Heavy"],
+    tier: 1,
+    description: "-1 to Evasion"
+  },
+  {
+    name: "Dagger",
+    category: "Primary",
+    hands: "One-Handed",
+    ranges: ["Melee", "Very Close"],
+    damage: { primary: "d8+1" },
+    traits: [],
+    tier: 1
+  },
+  {
+    name: "Quarterstaff",
+    category: "Primary",
+    hands: "Two-Handed",
+    ranges: ["Melee", "Very Close"],
+    damage: { primary: "d10+3" },
+    traits: [],
+    tier: 1
+  },
+  {
+    name: "Cutlass",
+    category: "Primary",
+    hands: "One-Handed",
+    ranges: ["Melee", "Very Close"],
+    damage: { primary: "d8+1" },
+    traits: [],
+    tier: 1
+  },
+  {
+    name: "Rapier",
+    category: "Primary",
+    hands: "One-Handed",
+    ranges: ["Melee", "Very Close"],
+    damage: { primary: "d8" },
+    traits: ["Quick"],
+    tier: 1,
+    description: "When you make an attack, you can mark a Stress to target another creature within range."
+  },
+  
+  // Tier 1 Reach Weapons
+  {
+    name: "Halberd",
+    category: "Primary",
+    hands: "Two-Handed",
+    ranges: ["Very Close"],
+    damage: { primary: "d10+2" },
+    traits: ["Cumbersome"],
+    tier: 1,
+    description: "-1 to Finesse"
+  },
+  {
+    name: "Spear",
+    category: "Primary",
+    hands: "Two-Handed",
+    ranges: ["Very Close"],
+    damage: { primary: "d8+3" },
+    traits: [],
+    tier: 1,
+    description: "-1 to Finesse"
+  },
+  
+  // Tier 1 Ranged Weapons
+  {
+    name: "Shortbow",
+    category: "Primary",
+    hands: "Two-Handed",
+    ranges: ["Far"],
+    damage: { primary: "d6+3" },
+    traits: [],
+    tier: 1
+  },
+  {
+    name: "Crossbow",
+    category: "Primary",
+    hands: "One-Handed",
+    ranges: ["Far"],
+    damage: { primary: "d6+1" },
+    traits: [],
+    tier: 1
+  },
+  {
+    name: "Longbow",
+    category: "Primary",
+    hands: "Two-Handed",
+    ranges: ["Very Far"],
+    damage: { primary: "d8+3" },
+    traits: ["Cumbersome"],
+    tier: 1,
+    description: "-1 to Finesse"
+  },
+  
+  // Tier 1 Magical Weapons
+  {
+    name: "Arcane Gauntlets",
+    category: "Primary",
+    hands: "Two-Handed",
+    ranges: ["Melee", "Very Close"],
+    damage: { primary: "d10+3" },
+    traits: [],
+    tier: 1
+  },
+  {
+    name: "Hallowed Axe",
+    category: "Primary",
+    hands: "One-Handed",
+    ranges: ["Melee", "Very Close"],
+    damage: { primary: "d8+1" },
+    traits: [],
+    tier: 1
+  },
+  {
+    name: "Glowing Rings",
+    category: "Primary",
+    hands: "Two-Handed",
+    ranges: ["Very Close"],
+    damage: { primary: "d10+2" },
+    traits: [],
+    tier: 1
+  },
+  {
+    name: "Hand Runes",
+    category: "Primary",
+    hands: "One-Handed",
+    ranges: ["Very Close"],
+    damage: { primary: "d10" },
+    traits: [],
+    tier: 1
+  },
+  {
+    name: "Returning Blade",
+    category: "Primary",
+    hands: "One-Handed",
+    ranges: ["Close"],
+    damage: { primary: "d8" },
+    traits: ["Returning"],
+    tier: 1,
+    description: "When this weapon is thrown within its range, it appears in your hand immediately after the attack."
+  },
+  {
+    name: "Shortstaff",
+    category: "Primary",
+    hands: "One-Handed",
+    ranges: ["Close"],
+    damage: { primary: "d8+1" },
+    traits: [],
+    tier: 1
+  },
+  {
+    name: "Dualstaff",
+    category: "Primary",
+    hands: "Two-Handed",
+    ranges: ["Far"],
+    damage: { primary: "d6+3" },
+    traits: [],
+    tier: 1
+  },
+  {
+    name: "Scepter",
+    category: "Primary",
+    hands: "Two-Handed",
+    ranges: ["Far"],
+    damage: { primary: "d6", versatile: "d8" },
+    traits: ["Versatile"],
+    tier: 1,
+    description: "This weapon can also be used with these statistics—Presence, Melee, d8."
+  },
+  {
+    name: "Wand",
+    category: "Primary",
+    hands: "One-Handed",
+    ranges: ["Far"],
+    damage: { primary: "d6+1" },
+    traits: [],
+    tier: 1
+  },
+  {
+    name: "Greatstaff",
+    category: "Primary",
+    hands: "Two-Handed",
+    ranges: ["Very Far"],
+    damage: { primary: "d6" },
+    traits: ["Powerful"],
+    tier: 1,
+    description: "On a successful attack, roll an additional damage die and discard the lowest result."
+  },
+  
+  // Selected Tier 2 Weapons
+  {
+    name: "Improved Broadsword",
+    category: "Primary",
+    hands: "One-Handed",
+    ranges: ["Melee", "Very Close"],
+    damage: { primary: "d8+3" },
+    traits: ["Reliable"],
+    tier: 2,
+    description: "+1 to attack rolls"
+  },
+  {
+    name: "Improved Longsword",
+    category: "Primary",
+    hands: "Two-Handed",
+    ranges: ["Melee", "Very Close"],
+    damage: { primary: "d10+6" },
+    traits: [],
+    tier: 2
+  },
+  {
+    name: "Improved Greatsword",
+    category: "Primary",
+    hands: "Two-Handed",
+    ranges: ["Melee", "Very Close"],
+    damage: { primary: "d10+6" },
+    traits: ["Massive"],
+    tier: 2,
+    description: "-1 to Evasion; on a successful attack, roll an additional damage die and discard the lowest result."
+  },
+  {
+    name: "Improved Warhammer",
+    category: "Primary",
+    hands: "Two-Handed",
+    ranges: ["Melee", "Very Close"],
+    damage: { primary: "d12+6" },
+    traits: ["Heavy"],
+    tier: 2,
+    description: "-1 to Evasion"
+  },
+  {
+    name: "Improved Rapier",
+    category: "Primary",
+    hands: "One-Handed",
+    ranges: ["Melee", "Very Close"],
+    damage: { primary: "d8+3" },
+    traits: ["Quick"],
+    tier: 2,
+    description: "When you make an attack, you can mark a Stress to target another creature within range."
+  },
+  {
+    name: "Gilded Falchion",
+    category: "Primary",
+    hands: "One-Handed",
+    ranges: ["Melee", "Very Close"],
+    damage: { primary: "d10+4" },
+    traits: ["Powerful"],
+    tier: 2,
+    description: "On a successful attack, roll an additional damage die and discard the lowest result."
+  },
+  {
+    name: "Knuckle Blades",
+    category: "Primary",
+    hands: "One-Handed",
+    ranges: ["Melee", "Very Close"],
+    damage: { primary: "d10+6" },
+    traits: ["Brutal"],
+    tier: 2,
+    description: "When you roll the maximum value on a damage die, roll an additional damage die."
+  },
+  {
+    name: "Bladed Whip",
+    category: "Primary",
+    hands: "One-Handed",
+    ranges: ["Very Close"],
+    damage: { primary: "d8+3" },
+    traits: ["Quick"],
+    tier: 2,
+    description: "When you make an attack, you can mark a Stress to target another creature within range."
+  },
+  {
+    name: "War Scythe",
+    category: "Primary",
+    hands: "Two-Handed",
+    ranges: ["Very Close"],
+    damage: { primary: "d8+5" },
+    traits: ["Reliable"],
+    tier: 2,
+    description: "+1 to attack rolls"
+  },
+  {
+    name: "Improved Longbow",
+    category: "Primary",
+    hands: "Two-Handed",
+    ranges: ["Very Far"],
+    damage: { primary: "d8+6" },
+    traits: ["Cumbersome"],
+    tier: 2,
+    description: "-1 to Finesse"
+  },
+  
+  // Secondary Weapons (Examples)
+  {
+    name: "Small Dagger",
+    category: "Secondary",
+    hands: "One-Handed",
+    ranges: ["Melee"],
+    damage: { primary: "d6" },
+    traits: [],
+    tier: 1
+  },
+  {
+    name: "Throwing Knife",
+    category: "Secondary",
+    hands: "One-Handed",
+    ranges: ["Close"],
+    damage: { primary: "d6" },
+    traits: [],
+    tier: 1
+  },
+  {
+    name: "Hand Crossbow",
+    category: "Secondary",
+    hands: "One-Handed",
+    ranges: ["Close"],
+    damage: { primary: "d6" },
+    traits: [],
+    tier: 1
+  }
+  
+  // Note: The SRD contains many more weapons across tiers 1-5
+  // This is a representative sample of the most common weapons
+]
