@@ -1,0 +1,47 @@
+# Daggerheart Character Sheet Development Rules
+
+## Code Quality Standards
+
+### Between Each Iteration:
+1. **Run linting** after making changes: `pnpm lint`
+2. **Format code** with Prettier: `pnpm format`
+3. **Check for TypeScript errors** before committing
+4. **Test in development server** to ensure changes compile
+
+### Making Changes:
+1. **Small, incremental changes** - one feature at a time
+2. **Preserve existing functionality** unless explicitly changing it
+3. **Test each change** before moving to the next
+4. **Fix linting errors immediately** - don't let them accumulate
+
+### Code Style:
+1. **No semicolons** (Prettier configured)
+2. **Double quotes** for strings
+3. **2-space indentation**
+4. **Tailwind classes** sorted by Prettier plugin
+5. **Prefix unused variables** with underscore: `_unusedVar`
+
+### React/Next.js Best Practices:
+1. **Client components** must have "use client" directive
+2. **Avoid console.log** in production code (warning in ESLint)
+3. **Type all component props** and avoid `any` types
+4. **Use proper TypeScript types** for event handlers
+
+### Git Workflow:
+1. **Commit after each successful iteration**
+2. **Clear commit messages** describing what changed
+3. **Test before committing** - ensure no breaking changes
+
+### Development Process:
+1. **Check current lint status** before starting work
+2. **Make changes incrementally** 
+3. **Run lint and format** after changes
+4. **Test in browser** with `pnpm dev`
+5. **Fix any issues** before proceeding
+6. **Update TODOs** as you complete tasks
+
+### Common Fixes:
+- Unused imports: Remove them
+- Unused variables: Prefix with `_` or remove
+- Console statements: Remove or replace with proper logging
+- Type errors: Add proper types, avoid `any`

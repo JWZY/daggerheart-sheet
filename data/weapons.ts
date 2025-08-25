@@ -22,7 +22,7 @@ export const DAGGERHEART_WEAPONS: WeaponData[] = [
     damage: { primary: "d8" },
     traits: ["Reliable"],
     tier: 1,
-    description: "+1 to attack rolls"
+    description: "+1 to attack rolls",
   },
   {
     name: "Longsword",
@@ -31,7 +31,7 @@ export const DAGGERHEART_WEAPONS: WeaponData[] = [
     ranges: ["Melee", "Very Close"],
     damage: { primary: "d10+3" },
     traits: [],
-    tier: 1
+    tier: 1,
   },
   {
     name: "Battleaxe",
@@ -40,7 +40,7 @@ export const DAGGERHEART_WEAPONS: WeaponData[] = [
     ranges: ["Melee", "Very Close"],
     damage: { primary: "d10+3" },
     traits: [],
-    tier: 1
+    tier: 1,
   },
   {
     name: "Greatsword",
@@ -50,7 +50,8 @@ export const DAGGERHEART_WEAPONS: WeaponData[] = [
     damage: { primary: "d10+3" },
     traits: ["Massive"],
     tier: 1,
-    description: "-1 to Evasion; on a successful attack, roll an additional damage die and discard the lowest result."
+    description:
+      "-1 to Evasion; on a successful attack, roll an additional damage die and discard the lowest result.",
   },
   {
     name: "Mace",
@@ -59,7 +60,7 @@ export const DAGGERHEART_WEAPONS: WeaponData[] = [
     ranges: ["Melee", "Very Close"],
     damage: { primary: "d8+1" },
     traits: [],
-    tier: 1
+    tier: 1,
   },
   {
     name: "Warhammer",
@@ -69,7 +70,7 @@ export const DAGGERHEART_WEAPONS: WeaponData[] = [
     damage: { primary: "d12+3" },
     traits: ["Heavy"],
     tier: 1,
-    description: "-1 to Evasion"
+    description: "-1 to Evasion",
   },
   {
     name: "Dagger",
@@ -78,7 +79,7 @@ export const DAGGERHEART_WEAPONS: WeaponData[] = [
     ranges: ["Melee", "Very Close"],
     damage: { primary: "d8+1" },
     traits: [],
-    tier: 1
+    tier: 1,
   },
   {
     name: "Quarterstaff",
@@ -87,7 +88,7 @@ export const DAGGERHEART_WEAPONS: WeaponData[] = [
     ranges: ["Melee", "Very Close"],
     damage: { primary: "d10+3" },
     traits: [],
-    tier: 1
+    tier: 1,
   },
   {
     name: "Cutlass",
@@ -96,7 +97,7 @@ export const DAGGERHEART_WEAPONS: WeaponData[] = [
     ranges: ["Melee", "Very Close"],
     damage: { primary: "d8+1" },
     traits: [],
-    tier: 1
+    tier: 1,
   },
   {
     name: "Rapier",
@@ -106,9 +107,10 @@ export const DAGGERHEART_WEAPONS: WeaponData[] = [
     damage: { primary: "d8" },
     traits: ["Quick"],
     tier: 1,
-    description: "When you make an attack, you can mark a Stress to target another creature within range."
+    description:
+      "When you make an attack, you can mark a Stress to target another creature within range.",
   },
-  
+
   // Tier 1 Reach Weapons
   {
     name: "Halberd",
@@ -118,7 +120,7 @@ export const DAGGERHEART_WEAPONS: WeaponData[] = [
     damage: { primary: "d10+2" },
     traits: ["Cumbersome"],
     tier: 1,
-    description: "-1 to Finesse"
+    description: "-1 to Finesse",
   },
   {
     name: "Spear",
@@ -128,9 +130,9 @@ export const DAGGERHEART_WEAPONS: WeaponData[] = [
     damage: { primary: "d8+3" },
     traits: [],
     tier: 1,
-    description: "-1 to Finesse"
+    description: "-1 to Finesse",
   },
-  
+
   // Tier 1 Ranged Weapons
   {
     name: "Shortbow",
@@ -139,7 +141,7 @@ export const DAGGERHEART_WEAPONS: WeaponData[] = [
     ranges: ["Far"],
     damage: { primary: "d6+3" },
     traits: [],
-    tier: 1
+    tier: 1,
   },
   {
     name: "Crossbow",
@@ -148,7 +150,7 @@ export const DAGGERHEART_WEAPONS: WeaponData[] = [
     ranges: ["Far"],
     damage: { primary: "d6+1" },
     traits: [],
-    tier: 1
+    tier: 1,
   },
   {
     name: "Longbow",
@@ -158,9 +160,9 @@ export const DAGGERHEART_WEAPONS: WeaponData[] = [
     damage: { primary: "d8+3" },
     traits: ["Cumbersome"],
     tier: 1,
-    description: "-1 to Finesse"
+    description: "-1 to Finesse",
   },
-  
+
   // Tier 1 Magical Weapons
   {
     name: "Arcane Gauntlets",
@@ -169,7 +171,7 @@ export const DAGGERHEART_WEAPONS: WeaponData[] = [
     ranges: ["Melee", "Very Close"],
     damage: { primary: "d10+3" },
     traits: [],
-    tier: 1
+    tier: 1,
   },
   {
     name: "Hallowed Axe",
@@ -178,7 +180,7 @@ export const DAGGERHEART_WEAPONS: WeaponData[] = [
     ranges: ["Melee", "Very Close"],
     damage: { primary: "d8+1" },
     traits: [],
-    tier: 1
+    tier: 1,
   },
   {
     name: "Glowing Rings",
@@ -187,7 +189,7 @@ export const DAGGERHEART_WEAPONS: WeaponData[] = [
     ranges: ["Very Close"],
     damage: { primary: "d10+2" },
     traits: [],
-    tier: 1
+    tier: 1,
   },
   {
     name: "Hand Runes",
@@ -196,7 +198,7 @@ export const DAGGERHEART_WEAPONS: WeaponData[] = [
     ranges: ["Very Close"],
     damage: { primary: "d10" },
     traits: [],
-    tier: 1
+    tier: 1,
   },
   {
     name: "Returning Blade",
@@ -206,7 +208,8 @@ export const DAGGERHEART_WEAPONS: WeaponData[] = [
     damage: { primary: "d8" },
     traits: ["Returning"],
     tier: 1,
-    description: "When this weapon is thrown within its range, it appears in your hand immediately after the attack."
+    description:
+      "When this weapon is thrown within its range, it appears in your hand immediately after the attack.",
   },
   {
     name: "Shortstaff",
@@ -215,7 +218,7 @@ export const DAGGERHEART_WEAPONS: WeaponData[] = [
     ranges: ["Close"],
     damage: { primary: "d8+1" },
     traits: [],
-    tier: 1
+    tier: 1,
   },
   {
     name: "Dualstaff",
@@ -224,7 +227,7 @@ export const DAGGERHEART_WEAPONS: WeaponData[] = [
     ranges: ["Far"],
     damage: { primary: "d6+3" },
     traits: [],
-    tier: 1
+    tier: 1,
   },
   {
     name: "Scepter",
@@ -234,7 +237,8 @@ export const DAGGERHEART_WEAPONS: WeaponData[] = [
     damage: { primary: "d6", versatile: "d8" },
     traits: ["Versatile"],
     tier: 1,
-    description: "This weapon can also be used with these statistics—Presence, Melee, d8."
+    description:
+      "This weapon can also be used with these statistics—Presence, Melee, d8.",
   },
   {
     name: "Wand",
@@ -243,7 +247,7 @@ export const DAGGERHEART_WEAPONS: WeaponData[] = [
     ranges: ["Far"],
     damage: { primary: "d6+1" },
     traits: [],
-    tier: 1
+    tier: 1,
   },
   {
     name: "Greatstaff",
@@ -253,9 +257,10 @@ export const DAGGERHEART_WEAPONS: WeaponData[] = [
     damage: { primary: "d6" },
     traits: ["Powerful"],
     tier: 1,
-    description: "On a successful attack, roll an additional damage die and discard the lowest result."
+    description:
+      "On a successful attack, roll an additional damage die and discard the lowest result.",
   },
-  
+
   // Selected Tier 2 Weapons
   {
     name: "Improved Broadsword",
@@ -265,7 +270,7 @@ export const DAGGERHEART_WEAPONS: WeaponData[] = [
     damage: { primary: "d8+3" },
     traits: ["Reliable"],
     tier: 2,
-    description: "+1 to attack rolls"
+    description: "+1 to attack rolls",
   },
   {
     name: "Improved Longsword",
@@ -274,7 +279,7 @@ export const DAGGERHEART_WEAPONS: WeaponData[] = [
     ranges: ["Melee", "Very Close"],
     damage: { primary: "d10+6" },
     traits: [],
-    tier: 2
+    tier: 2,
   },
   {
     name: "Improved Greatsword",
@@ -284,7 +289,8 @@ export const DAGGERHEART_WEAPONS: WeaponData[] = [
     damage: { primary: "d10+6" },
     traits: ["Massive"],
     tier: 2,
-    description: "-1 to Evasion; on a successful attack, roll an additional damage die and discard the lowest result."
+    description:
+      "-1 to Evasion; on a successful attack, roll an additional damage die and discard the lowest result.",
   },
   {
     name: "Improved Warhammer",
@@ -294,7 +300,7 @@ export const DAGGERHEART_WEAPONS: WeaponData[] = [
     damage: { primary: "d12+6" },
     traits: ["Heavy"],
     tier: 2,
-    description: "-1 to Evasion"
+    description: "-1 to Evasion",
   },
   {
     name: "Improved Rapier",
@@ -304,7 +310,8 @@ export const DAGGERHEART_WEAPONS: WeaponData[] = [
     damage: { primary: "d8+3" },
     traits: ["Quick"],
     tier: 2,
-    description: "When you make an attack, you can mark a Stress to target another creature within range."
+    description:
+      "When you make an attack, you can mark a Stress to target another creature within range.",
   },
   {
     name: "Gilded Falchion",
@@ -314,7 +321,8 @@ export const DAGGERHEART_WEAPONS: WeaponData[] = [
     damage: { primary: "d10+4" },
     traits: ["Powerful"],
     tier: 2,
-    description: "On a successful attack, roll an additional damage die and discard the lowest result."
+    description:
+      "On a successful attack, roll an additional damage die and discard the lowest result.",
   },
   {
     name: "Knuckle Blades",
@@ -324,7 +332,8 @@ export const DAGGERHEART_WEAPONS: WeaponData[] = [
     damage: { primary: "d10+6" },
     traits: ["Brutal"],
     tier: 2,
-    description: "When you roll the maximum value on a damage die, roll an additional damage die."
+    description:
+      "When you roll the maximum value on a damage die, roll an additional damage die.",
   },
   {
     name: "Bladed Whip",
@@ -334,7 +343,8 @@ export const DAGGERHEART_WEAPONS: WeaponData[] = [
     damage: { primary: "d8+3" },
     traits: ["Quick"],
     tier: 2,
-    description: "When you make an attack, you can mark a Stress to target another creature within range."
+    description:
+      "When you make an attack, you can mark a Stress to target another creature within range.",
   },
   {
     name: "War Scythe",
@@ -344,7 +354,7 @@ export const DAGGERHEART_WEAPONS: WeaponData[] = [
     damage: { primary: "d8+5" },
     traits: ["Reliable"],
     tier: 2,
-    description: "+1 to attack rolls"
+    description: "+1 to attack rolls",
   },
   {
     name: "Improved Longbow",
@@ -354,9 +364,9 @@ export const DAGGERHEART_WEAPONS: WeaponData[] = [
     damage: { primary: "d8+6" },
     traits: ["Cumbersome"],
     tier: 2,
-    description: "-1 to Finesse"
+    description: "-1 to Finesse",
   },
-  
+
   // Secondary Weapons (Examples)
   {
     name: "Small Dagger",
@@ -365,7 +375,7 @@ export const DAGGERHEART_WEAPONS: WeaponData[] = [
     ranges: ["Melee"],
     damage: { primary: "d6" },
     traits: [],
-    tier: 1
+    tier: 1,
   },
   {
     name: "Throwing Knife",
@@ -374,7 +384,7 @@ export const DAGGERHEART_WEAPONS: WeaponData[] = [
     ranges: ["Close"],
     damage: { primary: "d6" },
     traits: [],
-    tier: 1
+    tier: 1,
   },
   {
     name: "Hand Crossbow",
@@ -383,9 +393,9 @@ export const DAGGERHEART_WEAPONS: WeaponData[] = [
     ranges: ["Close"],
     damage: { primary: "d6" },
     traits: [],
-    tier: 1
-  }
-  
+    tier: 1,
+  },
+
   // Note: The SRD contains many more weapons across tiers 1-5
   // This is a representative sample of the most common weapons
 ]

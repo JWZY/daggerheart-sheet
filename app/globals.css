@@ -136,17 +136,24 @@
 
 /* Custom cyberpunk styles */
 .cyber-grid {
-  background-image: linear-gradient(rgba(0, 255, 255, 0.1) 1px, transparent 1px),
+  background-image:
+    linear-gradient(rgba(0, 255, 255, 0.1) 1px, transparent 1px),
     linear-gradient(90deg, rgba(0, 255, 255, 0.1) 1px, transparent 1px);
   background-size: 20px 20px;
 }
 
 .cyber-glow {
-  box-shadow: 0 0 5px rgba(0, 255, 255, 0.3), 0 0 10px rgba(0, 255, 255, 0.2), 0 0 15px rgba(0, 255, 255, 0.1);
+  box-shadow:
+    0 0 5px rgba(0, 255, 255, 0.3),
+    0 0 10px rgba(0, 255, 255, 0.2),
+    0 0 15px rgba(0, 255, 255, 0.1);
 }
 
 .cyber-glow-magenta {
-  box-shadow: 0 0 5px rgba(255, 0, 255, 0.3), 0 0 10px rgba(255, 0, 255, 0.2), 0 0 15px rgba(255, 0, 255, 0.1);
+  box-shadow:
+    0 0 5px rgba(255, 0, 255, 0.3),
+    0 0 10px rgba(255, 0, 255, 0.2),
+    0 0 15px rgba(255, 0, 255, 0.1);
 }
 
 .cyber-border {
@@ -161,7 +168,12 @@
   left: -1px;
   right: -1px;
   bottom: -1px;
-  background: linear-gradient(45deg, rgba(0, 255, 255, 0.1) 0%, rgba(255, 0, 255, 0.1) 50%, rgba(0, 255, 255, 0.1) 100%);
+  background: linear-gradient(
+    45deg,
+    rgba(0, 255, 255, 0.1) 0%,
+    rgba(255, 0, 255, 0.1) 50%,
+    rgba(0, 255, 255, 0.1) 100%
+  );
   z-index: -1;
   border-radius: inherit;
 }
@@ -171,13 +183,21 @@
 }
 
 .cyber-button {
-  background: linear-gradient(135deg, rgba(0, 255, 255, 0.1), rgba(255, 0, 255, 0.1));
+  background: linear-gradient(
+    135deg,
+    rgba(0, 255, 255, 0.1),
+    rgba(255, 0, 255, 0.1)
+  );
   border: 1px solid rgba(0, 255, 255, 0.5);
   transition: all 0.3s ease;
 }
 
 .cyber-button:hover {
-  background: linear-gradient(135deg, rgba(0, 255, 255, 0.2), rgba(255, 0, 255, 0.2));
+  background: linear-gradient(
+    135deg,
+    rgba(0, 255, 255, 0.2),
+    rgba(255, 0, 255, 0.2)
+  );
   box-shadow: 0 0 15px rgba(0, 255, 255, 0.4);
 }
 
@@ -210,4 +230,9 @@
 .stress-bar {
   background: linear-gradient(90deg, #ff8000 0%, #ffaa00 100%);
   box-shadow: 0 0 10px rgba(255, 128, 0, 0.4);
+}
+
+/* HP/Stress inline editing */
+.group:hover .group-hover\:opacity-100 {
+  transition: opacity 0.2s ease-in-out;
 }

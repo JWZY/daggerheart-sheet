@@ -19,7 +19,7 @@ const orbitron = Orbitron({
 export const metadata: Metadata = {
   title: "Daggerheart Character Sheet",
   description: "A cyberpunk-styled character sheet for Daggerheart RPG",
-    generator: 'v0.app'
+  generator: "v0.app",
 }
 
 export default function RootLayout({
@@ -28,8 +28,11 @@ export default function RootLayout({
   children: React.ReactNode
 }) {
   return (
-    <html lang="en" className={`${play.variable} ${orbitron.variable} antialiased`}>
-      <body className="font-sans bg-gradient-to-br from-slate-900 via-purple-900 to-slate-900 min-h-screen cyberpunk-grid">
+    <html
+      lang="en"
+      className={`${play.variable} ${orbitron.variable} antialiased`}
+    >
+      <body className="cyberpunk-grid min-h-screen bg-gradient-to-br from-slate-900 via-purple-900 to-slate-900 font-sans">
         {children}
       </body>
     </html>

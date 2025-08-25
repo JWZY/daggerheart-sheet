@@ -1,0 +1,21 @@
+# Dependencies
+node_modules
+pnpm-lock.yaml
+
+# Build outputs
+.next
+out
+dist
+
+# Environment files
+.env*
+
+# Git
+.git
+
+# IDE
+.vscode
+.idea
+
+# Generated files
+*.generated.*
