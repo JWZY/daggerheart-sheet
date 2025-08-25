@@ -624,7 +624,7 @@ export function DaggerheartCharacterSheet() {
       {/* Main Content - Centered */}
       <div className="mx-auto max-w-4xl space-y-6 pb-20">
         {/* Compact Character Header */}
-        <Card className="cyber-card">
+        <Card className="cyber-border bg-gradient-to-r from-[#0a0a0f]/90 to-[#1a1a2e]/90 backdrop-blur-sm">
           <CardContent className="py-4">
             <div className="flex items-start justify-between">
               <div className="flex gap-4">
@@ -656,6 +656,21 @@ export function DaggerheartCharacterSheet() {
                       />
                       <div className="flex gap-2">
                         <SearchableSelect
+                          id="ancestry"
+                          value={character.ancestry?.name || ""}
+                          onChange={handleAncestryChange}
+                          options={[
+                            { value: "", label: "Select Ancestry" },
+                            ...DAGGERHEART_ANCESTRIES.map((ancestry) => ({
+                              value: ancestry.name,
+                              label: ancestry.name,
+                              description: ancestry.description,
+                            })),
+                          ]}
+                          placeholder="Select Ancestry"
+                          className="h-8 bg-black/70 text-[#00ffff]"
+                        />
+                        <SearchableSelect
                           id="class"
                           value={character.class}
                           onChange={handleClassChange}
@@ -675,6 +690,8 @@ export function DaggerheartCharacterSheet() {
                           }`}
                           required
                         />
+                      </div>
+                      <div className="flex gap-2">
                         <Input
                           id="subclass"
                           value={character.subclass || ""}
@@ -682,7 +699,7 @@ export function DaggerheartCharacterSheet() {
                             updateCharacter({ subclass: e.target.value })
                           }
                           placeholder="Subclass"
-                          className="cyber-input h-8 w-32 font-sans text-sm placeholder:text-[#00ffff]/50"
+                          className="cyber-input h-8 flex-1 font-sans text-sm placeholder:text-[#00ffff]/50"
                         />
                         <Input
                           id="level"
@@ -712,33 +729,6 @@ export function DaggerheartCharacterSheet() {
                     </>
                   )}
                 </div>
-              </div>
-
-              {/* Action Buttons */}
-              <div className="flex gap-2">
-                <Button
-                  onClick={() => {}}
-                  className="cyber-button h-8 w-8 border-[#00ffff] bg-[#0a0a0f]/90 p-0 text-[#00ffff] hover:bg-[#00ffff]/20"
-                  title="Downtime"
-                >
-                  <Flame className="h-4 w-4" />
-                </Button>
-                <Button
-                  onClick={() => setIsEditMode(!isEditMode)}
-                  className="cyber-button flex h-8 items-center gap-1 border-[#00ffff] bg-[#0a0a0f]/90 px-2 font-mono text-xs text-[#00ffff] hover:bg-[#00ffff]/20"
-                >
-                  {isEditMode ? (
-                    <>
-                      <User className="h-3 w-3" />
-                      PLAY
-                    </>
-                  ) : (
-                    <>
-                      <Settings className="h-3 w-3" />
-                      EDIT
-                    </>
-                  )}
-                </Button>
               </div>
             </div>
           </CardContent>
@@ -1429,18 +1419,39 @@ export function DaggerheartCharacterSheet() {
         </Card>
       </div>
 
-      {/* Floating Roll History Button */}
+      {/* Floating Roll History Button - Only in Play Mode */}
+      {!isEditMode && (
+        <Button
+          onClick={() => setIsHistoryOpen(!isHistoryOpen)}
+          className="cyber-button fixed right-4 bottom-20 z-50 flex items-center gap-2 border-[#00ffff] bg-[#0a0a0f]/90 font-mono text-[#00ffff] shadow-lg hover:bg-[#00ffff]/20"
+          size="lg"
+        >
+          <Clock className="h-5 w-5" />
+          <span className="hidden sm:inline">Roll History</span>
+          {rollHistory.length > 0 && (
+            <Badge className="ml-1 border-[#00ffff] bg-[#ff00ff]/30 text-[#00ffff]">
+              {rollHistory.length}
+            </Badge>
+          )}
+        </Button>
+      )}
+
+      {/* Floating Play/Edit Mode Button */}
       <Button
-        onClick={() => setIsHistoryOpen(!isHistoryOpen)}
-        className="cyber-button fixed right-4 bottom-4 z-50 flex items-center gap-2 border-[#00ffff] bg-[#0a0a0f]/90 font-mono text-[#00ffff] shadow-lg hover:bg-[#00ffff]/20"
+        onClick={() => setIsEditMode(!isEditMode)}
+        className="cyber-button fixed bottom-4 left-1/2 z-50 flex -translate-x-1/2 items-center gap-2 border-[#00ffff] bg-[#0a0a0f]/90 px-6 font-mono text-[#00ffff] shadow-lg hover:bg-[#00ffff]/20"
         size="lg"
       >
-        <Clock className="h-5 w-5" />
-        <span className="hidden sm:inline">Roll History</span>
-        {rollHistory.length > 0 && (
-          <Badge className="ml-1 border-[#00ffff] bg-[#ff00ff]/30 text-[#00ffff]">
-            {rollHistory.length}
-          </Badge>
+        {isEditMode ? (
+          <>
+            <User className="h-5 w-5" />
+            PLAY MODE
+          </>
+        ) : (
+          <>
+            <Settings className="h-5 w-5" />
+            EDIT MODE
+          </>
         )}
       </Button>
 
