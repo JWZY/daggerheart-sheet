@@ -211,9 +211,9 @@ export function DaggerheartCharacterSheet() {
   const [isHistoryOpen, setIsHistoryOpen] = useState(false)
 
   // Domain card filters
-  const [domainFilter, setDomainFilter] = useState<string>("")
-  const [levelFilter, setLevelFilter] = useState<string>("")
-  const [typeFilter, setTypeFilter] = useState<string>("")
+  const [domainFilter, setDomainFilter] = useState<string>("all")
+  const [levelFilter, setLevelFilter] = useState<string>("all")
+  const [typeFilter, setTypeFilter] = useState<string>("all")
   const [searchFilter, setSearchFilter] = useState<string>("")
 
   useEffect(() => {
@@ -285,9 +285,10 @@ export function DaggerheartCharacterSheet() {
 
   // Filter domain cards based on current filters
   const filteredDomainCards = DOMAIN_CARDS.filter((card) => {
-    const matchesDomain = !domainFilter || card.domain === domainFilter
-    const matchesLevel = !levelFilter || card.level === Number(levelFilter)
-    const matchesType = !typeFilter || card.type === typeFilter
+    const matchesDomain = domainFilter === "all" || card.domain === domainFilter
+    const matchesLevel =
+      levelFilter === "all" || card.level === Number(levelFilter)
+    const matchesType = typeFilter === "all" || card.type === typeFilter
     const matchesSearch =
       !searchFilter ||
       card.name.toLowerCase().includes(searchFilter.toLowerCase()) ||
@@ -1341,7 +1342,7 @@ export function DaggerheartCharacterSheet() {
                     <SelectValue placeholder="All Domains" />
                   </SelectTrigger>
                   <SelectContent className="border-[#00ffff] bg-[#1a1a2e]">
-                    <SelectItem value="">All Domains</SelectItem>
+                    <SelectItem value="all">All Domains</SelectItem>
                     {uniqueDomains.map((domain) => (
                       <SelectItem key={domain} value={domain}>
                         {domain}
@@ -1355,7 +1356,7 @@ export function DaggerheartCharacterSheet() {
                     <SelectValue placeholder="All Levels" />
                   </SelectTrigger>
                   <SelectContent className="border-[#00ffff] bg-[#1a1a2e]">
-                    <SelectItem value="">All Levels</SelectItem>
+                    <SelectItem value="all">All Levels</SelectItem>
                     {uniqueLevels.map((level) => (
                       <SelectItem key={level} value={level.toString()}>
                         Level {level}
@@ -1369,7 +1370,7 @@ export function DaggerheartCharacterSheet() {
                     <SelectValue placeholder="All Types" />
                   </SelectTrigger>
                   <SelectContent className="border-[#00ffff] bg-[#1a1a2e]">
-                    <SelectItem value="">All Types</SelectItem>
+                    <SelectItem value="all">All Types</SelectItem>
                     {uniqueTypes.map((type) => (
                       <SelectItem key={type} value={type}>
                         {type}
