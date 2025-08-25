@@ -16,301 +16,232 @@ export interface DomainCard {
 export const DOMAIN_CARDS: DomainCard[] = [
   // Level 1 Sage Cards
   {
-    name: "Analyze",
+    name: "Gifted Tracker",
     domain: "Sage",
-    type: "Spell",
+    type: "Ability",
     level: 1,
-    recallCost: 1,
+    recallCost: 0,
     description:
-      "Touch a creature or object to learn one piece of information about it",
+      "Track creatures and ask questions about their passage",
     effect:
-      "Learn one piece of information: its nature, properties, recent history, or emotional state",
+      "When you're tracking a specific creature or group of creatures based on signs of their passage, you can spend any number of Hope and ask the GM that many questions from the following list.\n\n- What direction did they go?\n- How long ago did they pass through?\n- What were they doing in this location?\n- How many of them were here?\n\nWhen you encounter creatures you've tracked in this way, gain a +1 bonus to your Evasion against them.",
   },
   {
-    name: "Detect Magic",
+    name: "Nature's Tongue",
     domain: "Sage",
-    type: "Spell",
+    type: "Ability",
     level: 1,
-    recallCost: 1,
-    description: "Sense magical auras within Close range",
+    recallCost: 0,
+    description: "Speak to plants and animals in the natural world",
     effect:
-      "Detect presence and general nature of magical effects, enchanted items, or spellcasters",
+      "You can speak the language of the natural world. When you want to speak to the plants and animals around you, make an Instinct Roll (12). On a success, they'll give you the information they know. On a roll with Fear, their knowledge might be limited or come at a cost.\n\nAdditionally, before you make a Spellcast Roll while within a natural environment, you can spend a Hope to gain a +2 bonus to the roll.",
   },
   {
-    name: "Guidance",
+    name: "Vicious Entangle",
     domain: "Sage",
     type: "Spell",
     level: 1,
     recallCost: 1,
-    description: "Grant wisdom to aid an ally's next action",
-    effect: "Target ally gains Advantage on their next action roll",
-  },
-  {
-    name: "Mend",
-    domain: "Sage",
-    type: "Spell",
-    level: 1,
-    recallCost: 1,
-    description: "Repair minor damage to objects or heal small wounds",
-    effect: "Repair broken mundane objects or restore 1 HP to a target",
+    description: "Roots and vines reach out to damage and restrain targets",
+    effect: "Make a Spellcast Roll against a target within Far range. On a success, roots and vines reach out from the ground, dealing 1d8+1 physical damage and temporarily Restraining the target.\n\nAdditionally on a success, you can spend a Hope to temporarily Restrain another adversary within Very Close range of your target.",
   },
 
   // Level 2 Sage Cards
   {
-    name: "Comprehend Languages",
+    name: "Conjure Swarm",
     domain: "Sage",
     type: "Spell",
     level: 2,
-    recallCost: 2,
-    description: "Understand any spoken or written language for the scene",
+    recallCost: 1,
+    description: "Summon armored beetles or fire flies to aid you",
     effect:
-      "Understand and communicate in any language encountered during this scene",
+      "Tekaira Armored Beetles: Mark a Stress to conjure armored beetles that encircle you. When you next take damage, reduce the severity by one threshold. You can spend a Hope to keep the beetles conjured after taking damage.\n\nFire Flies: Make a Spellcast Roll against all adversaries within Close range. Spend a Hope to deal 2d8+3 magic damage to targets you succeed against.",
   },
   {
-    name: "Identify",
+    name: "Natural Familiar",
     domain: "Sage",
     type: "Spell",
     level: 2,
-    recallCost: 2,
-    description: "Learn the magical properties of an item or effect",
+    recallCost: 1,
+    description: "Summon a small nature spirit or forest critter companion",
     effect:
-      "Discover all magical properties, command words, and methods of activation",
-  },
-  {
-    name: "Locate Object",
-    domain: "Sage",
-    type: "Spell",
-    level: 2,
-    recallCost: 2,
-    description: "Sense the direction to a specific object within Far range",
-    effect:
-      "Know the general direction and approximate distance to a known object",
-  },
-  {
-    name: "Augury",
-    domain: "Sage",
-    type: "Spell",
-    level: 2,
-    recallCost: 2,
-    description:
-      "Receive an omen about the results of a specific course of action",
-    effect:
-      "GM provides cryptic guidance about whether an action will be beneficial or harmful",
+      "Spend a Hope to summon a small nature spirit or forest critter to your side until your next rest, you cast Natural Familiar again, or the familiar is targeted by an attack. If you spend an additional Hope, you can summon a familiar that flies. You can communicate with them, make a Spellcast Roll to command them to perform simple tasks, and mark a Stress to see through their eyes.\n\nWhen you deal damage to an adversary within Melee range of your familiar, you add a d6 to your damage roll.",
   },
 
   // Level 3 Sage Cards
   {
-    name: "Clairvoyance",
+    name: "Corrosive Projectile",
     domain: "Sage",
     type: "Spell",
     level: 3,
-    recallCost: 3,
-    description: "Create an invisible sensor to observe a distant location",
+    recallCost: 1,
+    description: "Launch a corrosive projectile that deals damage and corrodes targets",
     effect:
-      "See and hear from a location you've been to before within Very Far range",
+      "Make a Spellcast Roll against a target within Far range. On a success, deal 6d4 magic damage using your Proficiency. Additionally, mark 2 or more Stress to make them permanently Corroded. While a target is Corroded, they gain a –1 penalty to their Difficulty for every 2 Stress you spent. This condition can stack.",
   },
   {
-    name: "Dispel Magic",
+    name: "Towering Stalk",
     domain: "Sage",
     type: "Spell",
     level: 3,
-    recallCost: 3,
-    description: "End magical effects on a target",
+    recallCost: 1,
+    description: "Conjure a thick stalk that can be climbed or used as an attack",
     effect:
-      "Make a Spellcast roll vs difficulty 12+spell level to end magical effects",
-  },
-  {
-    name: "Tongues",
-    domain: "Sage",
-    type: "Spell",
-    level: 3,
-    recallCost: 3,
-    description: "Grant the ability to speak and understand all languages",
-    effect:
-      "Target can communicate with any intelligent creature for the scene",
-  },
-  {
-    name: "Remove Curse",
-    domain: "Sage",
-    type: "Spell",
-    level: 3,
-    recallCost: 3,
-    description: "Break curses and harmful magical effects",
-    effect: "End one curse or harmful magical effect on the target",
+      "Once per rest, you can conjure a thick, twisting stalk within Close range that can be easily climbed. Its height can grow up to Far range.\n\nMark a Stress to use this spell as an attack. Make a Spellcast Roll against an adversary or group of adversaries within Close range. The erupting stalk lifts targets you succeed against into the air and drops them, dealing d8 physical damage using your Proficiency.",
   },
 
   // Level 4 Sage Cards
   {
-    name: "Divination",
+    name: "Death Grip",
     domain: "Sage",
     type: "Spell",
     level: 4,
-    recallCost: 4,
+    recallCost: 1,
     description:
-      "Ask a question and receive truthful guidance from higher powers",
+      "Vines reach out to pull, constrict, or damage targets",
     effect:
-      "Ask one question about events within the next day and receive accurate guidance",
+      "Make a Spellcast Roll against a target within Close range and choose one of the following options:\n\n- You pull the target into Melee range or pull yourself into Melee range of them.\n- You constrict the target and force them to mark 2 Stress.\n- All adversaries between you and the target must succeed on a Reaction Roll (13) or be hit by vines, taking 3d6+2 physical damage.\n\nOn a success, vines reach out from your hands, causing the chosen effect and temporarily Restraining the target.",
   },
   {
-    name: "Locate Creature",
+    name: "Healing Field",
     domain: "Sage",
     type: "Spell",
     level: 4,
-    recallCost: 4,
-    description: "Sense the location of a specific creature",
+    recallCost: 2,
+    description: "Conjure a field of healing plants",
     effect:
-      "Know direction and distance to a creature you've met within Very Far range",
-  },
-  {
-    name: "Arcane Eye",
-    domain: "Sage",
-    type: "Spell",
-    level: 4,
-    recallCost: 4,
-    description: "Create an invisible, mobile eye to scout ahead",
-    effect:
-      "Control a floating eye that can move and observe for up to an hour",
+      "Once per long rest, you can conjure a field of healing plants around you. Everywhere within Close range of you bursts to life with vibrant nature, allowing you and all allies in the area to clear a Hit Point.\n\nSpend 2 Hope to allow you and all allies to clear 2 Hit Points instead.",
   },
 
   // Level 5 Sage Cards
   {
-    name: "Scrying",
+    name: "Thorn Skin",
     domain: "Sage",
     type: "Spell",
     level: 5,
-    recallCost: 5,
-    description: "Observe a creature or location from great distance",
+    recallCost: 1,
+    description: "Sprout thorns that reduce damage and hurt attackers",
     effect:
-      "View and hear a specific creature or familiar location anywhere in the world",
+      "Once per rest, spend a Hope to sprout thorns all over your body. When you do, place a number of tokens equal to your Spellcast trait on this card. When you take damage, you can spend any number of tokens to roll that number of d6s. Add the results together and reduce the incoming damage by that amount. If you're within Melee range of the attacker, deal that amount of damage back to them.\n\nWhen you take a rest, clear all unspent tokens.",
   },
   {
-    name: "Legend Lore",
+    name: "Wild Fortress",
     domain: "Sage",
     type: "Spell",
     level: 5,
-    recallCost: 5,
-    description: "Learn legendary information about a person, place, or object",
+    recallCost: 1,
+    description: "Grow a natural barricade dome for protection",
     effect:
-      "Discover significant historical facts, legends, or hidden knowledge",
-  },
-  {
-    name: "Greater Restoration",
-    domain: "Sage",
-    type: "Spell",
-    level: 5,
-    recallCost: 5,
-    description: "Remove powerful curses and restore lost abilities",
-    effect:
-      "End any curse, restore drained abilities, or cure magical diseases",
+      "Make a Spellcast Roll (13). On a success, spend 2 Hope to grow a natural barricade in the shape of a dome that you and one ally can take cover within. While inside the dome, a creature can't be targeted by attacks and can't make attacks. Attacks made against the dome automatically succeed. The dome has the following damage thresholds and lasts until it marks 3 Hit Points. Place tokens on this card to represent marking Hit Points.\n\n**Thresholds: 15/30**",
   },
 
   // Level 6 Sage Cards
   {
-    name: "True Seeing",
+    name: "Conjured Steeds",
     domain: "Sage",
     type: "Spell",
     level: 6,
-    recallCost: 6,
-    description: "See through illusions and perceive the true nature of things",
+    recallCost: 0,
+    description: "Conjure magical steeds for travel and combat",
     effect:
-      "See invisible creatures, detect illusions, and perceive true forms for the scene",
+      "Spend any number of Hope to conjure that many magical steeds (such as horses, camels, or elephants) that you and your allies can ride until your next long rest or the steeds take any damage. The steeds double your land speed while traveling and, when in danger, allow you to move within Far range without having to roll. Creatures riding a steed gain a –2 penalty to attack rolls and a +2 bonus to damage rolls.",
   },
   {
-    name: "Find the Path",
+    name: "Forager",
     domain: "Sage",
-    type: "Spell",
+    type: "Ability",
     level: 6,
-    recallCost: 6,
-    description: "Know the most direct route to a specific location",
+    recallCost: 1,
+    description: "Forage for useful consumables during downtime",
     effect:
-      "Unerringly navigate to any location on the same plane of existence",
+      "As an additional downtime move you can choose, roll a d6 to see what you forage. Work with the GM to describe it and add it to your inventory as a consumable. Your party can carry up to five foraged consumables at a time.\n\n1. An unusual flower (Clear 2 Stress)\n2. A beautiful relic (Gain 2 Hope)\n3. An arcane rune (+2 to a Spellcast Roll)\n4. A healing vial (Clear 2 Hit Points)\n5. A luck charm (Reroll any die)\n6. Choose one of the options above.",
   },
 
   // Level 7 Sage Cards
   {
-    name: "Plane Shift",
+    name: "Sage-Touched",
     domain: "Sage",
-    type: "Spell",
+    type: "Ability",
     level: 7,
-    recallCost: 7,
-    description: "Transport yourself and allies to another plane of existence",
-    effect: "Travel to another plane with up to 8 willing creatures",
+    recallCost: 2,
+    description: "Gain powerful benefits when focused on Sage domain",
+    effect: "When 4 or more of the domain cards in your loadout are from the Sage domain, gain the following benefits:\n\n- While you're in a natural environment, you gain a +2 bonus to your Spellcast Rolls.\n- Once per rest, you can double your Agility or Instinct when making a roll that uses that trait. You must choose to do this before you roll.",
   },
   {
-    name: "Reverse Gravity",
+    name: "Wild Surge",
     domain: "Sage",
     type: "Spell",
     level: 7,
-    recallCost: 7,
-    description: "Reverse gravity in a large area",
+    recallCost: 2,
+    description: "Channel nature to enhance yourself with escalating power",
     effect:
-      "Creatures and objects in Far range fall upward for several minutes",
+      "Once per long rest, mark a Stress to channel the natural world around you and enhance yourself. Describe how your appearance changes, then place a d6 on this card with the 1 value facing up.\n\nWhile the Wild Surge Die is active, you add its value to every action roll you make. After you add its value to a roll, increase the Wild Surge Die's value by one. When the die's value would exceed 6 or you take a rest, this form drops and you must mark an additional Stress.",
   },
 
   // Level 8 Sage Cards
   {
-    name: "Mind Blank",
+    name: "Forest Sprites",
     domain: "Sage",
     type: "Spell",
     level: 8,
-    recallCost: 8,
-    description: "Protect against mental intrusion and divination",
+    recallCost: 2,
+    description: "Create forest sprites that aid allies in combat",
     effect:
-      "Target becomes immune to divination magic and mental effects for 24 hours",
+      "Make a Spellcast Roll (13). On a success, spend any number of Hope to create an equal number of small forest sprites who appear at points you choose within Far range, providing the following benefits:\n\n- Your allies gain a +3 bonus to attack rolls against adversaries within Melee range of a sprite.\n- An ally who marks an Armor Slot while within Melee range of a sprite can mark an additional Armor Slot.\n\nA sprite vanishes after granting a benefit or taking any damage.",
   },
   {
-    name: "Feeblemind",
+    name: "Rejuvenation Barrier",
     domain: "Sage",
     type: "Spell",
     level: 8,
-    recallCost: 8,
-    description: "Drain a creature's intelligence and personality",
+    recallCost: 1,
+    description: "Create a protective barrier that heals and protects",
     effect:
-      "Target loses ability to cast spells, speak, or think clearly until cured",
+      "Make a Spellcast Roll (15). Once per rest on a success, create a temporary barrier of protective energy around you at Very Close range. You and all allies within the barrier when this spell is cast clear 1d4 Hit Points. While the barrier is up, you and all allies within have resistance to physical damage from outside the barrier.\n\nWhen you move, the barrier follows you.",
   },
 
   // Level 9 Sage Cards
   {
-    name: "Foresight",
+    name: "Fane of the Wilds",
     domain: "Sage",
-    type: "Spell",
+    type: "Ability",
     level: 9,
-    recallCost: 9,
-    description: "Grant supernatural awareness of immediate future dangers",
+    recallCost: 2,
+    description: "Gain tokens based on Sage cards for spellcast bonuses",
     effect:
-      "Target gains Advantage on all rolls and enemies have Disadvantage against them for 8 hours",
+      "After a long rest, place a number of tokens equal to the number of Sage domain cards in your loadout and vault on this card.\n\nWhen you would make a Spellcast Roll, you can spend any number of tokens after the roll to gain a +1 bonus for each token spent.\n\nWhen you critically succeed on a Spellcast Roll for a Sage domain spell, gain a token.\n\nWhen you take a long rest, clear all unspent tokens.",
   },
   {
-    name: "Time Stop",
+    name: "Plant Dominion",
     domain: "Sage",
     type: "Spell",
     level: 9,
-    recallCost: 9,
-    description: "Briefly stop time for everyone except yourself",
+    recallCost: 1,
+    description: "Reshape the natural world around you",
     effect:
-      "Take several actions while time is frozen, but cannot affect other creatures directly",
+      "Make a Spellcast Roll (18). Once per long rest on a success, you reshape the natural world, changing the surrounding plant life anywhere within Far range of you. For example, you can grow trees instantly, clear a path through dense vines, or create a wall of roots.",
   },
 
   // Level 10 Sage Cards
   {
-    name: "Wish",
+    name: "Force of Nature",
     domain: "Sage",
     type: "Spell",
     level: 10,
-    recallCost: 10,
-    description: "Alter reality through the power of desire",
+    recallCost: 2,
+    description: "Transform into a hulking nature spirit",
     effect:
-      "Duplicate any spell or create a powerful magical effect as determined by the GM",
+      "Mark a Stress to transform into a hulking nature spirit, gaining the following benefits:\n\n- When you succeed on an attack or Spellcast Roll, gain a +10 bonus to the damage roll.\n- When you deal enough damage to defeat a creature within Close range, you absorb them and clear an Armor Slot.\n- You can't be Restrained.\n\nBefore you make an action roll, you must spend a Hope. If you can't, you revert to your normal form.",
   },
   {
-    name: "True Resurrection",
+    name: "Tempest",
     domain: "Sage",
     type: "Spell",
     level: 10,
-    recallCost: 10,
-    description: "Restore life to any creature that has died",
+    recallCost: 2,
+    description: "Create devastating weather effects",
     effect:
-      "Return any creature to life regardless of how long they've been dead or condition of body",
+      "Choose one of the following tempests and make a Spellcast Roll against all targets within Far range. Targets you succeed against experience its effects until the GM spends a Fear on their turn to end this spell.\n\n- **Blizzard**: Deal 2d20+8 magic damage and targets are temporarily Vulnerable.\n- **Hurricane**: Deal 3d10+10 magic damage and choose a direction the wind is blowing. Targets can't move against the wind.\n- **Sandstorm**: Deal 5d6+9 magic damage. Attacks made from beyond Melee range have disadvantage.",
   },
 
   // ARCANA DOMAIN CARDS
