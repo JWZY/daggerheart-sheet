@@ -21,8 +21,7 @@ export const DOMAIN_CARDS: DomainCard[] = [
     type: "Ability",
     level: 1,
     recallCost: 0,
-    description:
-      "Track creatures and ask questions about their passage",
+    description: "Track creatures and ask questions about their passage",
     effect:
       "When you're tracking a specific creature or group of creatures based on signs of their passage, you can spend any number of Hope and ask the GM that many questions from the following list.\n\n- What direction did they go?\n- How long ago did they pass through?\n- What were they doing in this location?\n- How many of them were here?\n\nWhen you encounter creatures you've tracked in this way, gain a +1 bonus to your Evasion against them.",
   },
@@ -43,7 +42,8 @@ export const DOMAIN_CARDS: DomainCard[] = [
     level: 1,
     recallCost: 1,
     description: "Roots and vines reach out to damage and restrain targets",
-    effect: "Make a Spellcast Roll against a target within Far range. On a success, roots and vines reach out from the ground, dealing 1d8+1 physical damage and temporarily Restraining the target.\n\nAdditionally on a success, you can spend a Hope to temporarily Restrain another adversary within Very Close range of your target.",
+    effect:
+      "Make a Spellcast Roll against a target within Far range. On a success, roots and vines reach out from the ground, dealing 1d8+1 physical damage and temporarily Restraining the target.\n\nAdditionally on a success, you can spend a Hope to temporarily Restrain another adversary within Very Close range of your target.",
   },
 
   // Level 2 Sage Cards
@@ -75,7 +75,8 @@ export const DOMAIN_CARDS: DomainCard[] = [
     type: "Spell",
     level: 3,
     recallCost: 1,
-    description: "Launch a corrosive projectile that deals damage and corrodes targets",
+    description:
+      "Launch a corrosive projectile that deals damage and corrodes targets",
     effect:
       "Make a Spellcast Roll against a target within Far range. On a success, deal 6d4 magic damage using your Proficiency. Additionally, mark 2 or more Stress to make them permanently Corroded. While a target is Corroded, they gain a –1 penalty to their Difficulty for every 2 Stress you spent. This condition can stack.",
   },
@@ -85,7 +86,8 @@ export const DOMAIN_CARDS: DomainCard[] = [
     type: "Spell",
     level: 3,
     recallCost: 1,
-    description: "Conjure a thick stalk that can be climbed or used as an attack",
+    description:
+      "Conjure a thick stalk that can be climbed or used as an attack",
     effect:
       "Once per rest, you can conjure a thick, twisting stalk within Close range that can be easily climbed. Its height can grow up to Far range.\n\nMark a Stress to use this spell as an attack. Make a Spellcast Roll against an adversary or group of adversaries within Close range. The erupting stalk lifts targets you succeed against into the air and drops them, dealing d8 physical damage using your Proficiency.",
   },
@@ -97,8 +99,7 @@ export const DOMAIN_CARDS: DomainCard[] = [
     type: "Spell",
     level: 4,
     recallCost: 1,
-    description:
-      "Vines reach out to pull, constrict, or damage targets",
+    description: "Vines reach out to pull, constrict, or damage targets",
     effect:
       "Make a Spellcast Roll against a target within Close range and choose one of the following options:\n\n- You pull the target into Melee range or pull yourself into Melee range of them.\n- You constrict the target and force them to mark 2 Stress.\n- All adversaries between you and the target must succeed on a Reaction Roll (13) or be hit by vines, taking 3d6+2 physical damage.\n\nOn a success, vines reach out from your hands, causing the chosen effect and temporarily Restraining the target.",
   },
@@ -165,7 +166,8 @@ export const DOMAIN_CARDS: DomainCard[] = [
     level: 7,
     recallCost: 2,
     description: "Gain powerful benefits when focused on Sage domain",
-    effect: "When 4 or more of the domain cards in your loadout are from the Sage domain, gain the following benefits:\n\n- While you're in a natural environment, you gain a +2 bonus to your Spellcast Rolls.\n- Once per rest, you can double your Agility or Instinct when making a roll that uses that trait. You must choose to do this before you roll.",
+    effect:
+      "When 4 or more of the domain cards in your loadout are from the Sage domain, gain the following benefits:\n\n- While you're in a natural environment, you gain a +2 bonus to your Spellcast Rolls.\n- Once per rest, you can double your Agility or Instinct when making a roll that uses that trait. You must choose to do this before you roll.",
   },
   {
     name: "Wild Surge",

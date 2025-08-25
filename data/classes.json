@@ -1,10 +1,7 @@
 [
   {
     "name": "Druid",
-    "domains": [
-      "Sage",
-      "Arcana"
-    ],
+    "domains": ["Sage", "Arcana"],
     "starting_evasion": 10,
     "starting_hp": 6,
     "class_items": "A small bag of rocks and bones or a",
@@ -50,9 +47,7 @@
   },
   {
     "name": "Guardian",
-    "domains": [
-      "Valor and Blade"
-    ],
+    "domains": ["Valor and Blade"],
     "starting_evasion": 9,
     "starting_hp": 7,
     "class_items": "A totem from your mentor or a secret key",
@@ -80,10 +75,7 @@
   },
   {
     "name": "Ranger",
-    "domains": [
-      "Bone",
-      "Sage"
-    ],
+    "domains": ["Bone", "Sage"],
     "starting_evasion": 12,
     "starting_hp": 6,
     "class_items": "A trophy from your first kill or a seemingly",
@@ -155,10 +147,7 @@
   },
   {
     "name": "Rogue",
-    "domains": [
-      "Midnight",
-      "Grace"
-    ],
+    "domains": ["Midnight", "Grace"],
     "starting_evasion": 12,
     "starting_hp": 6,
     "class_items": "A set of forgery tools or a grappling hook",
@@ -185,10 +174,7 @@
   },
   {
     "name": "Seraph",
-    "domains": [
-      "Splendor",
-      "Valor"
-    ],
+    "domains": ["Splendor", "Valor"],
     "starting_evasion": 9,
     "starting_hp": 7,
     "class_items": "A bundle of offerings or a sigil of your god",
@@ -230,10 +216,7 @@
   },
   {
     "name": "Sorcerer",
-    "domains": [
-      "Arcana",
-      "Midnight"
-    ],
+    "domains": ["Arcana", "Midnight"],
     "starting_evasion": 10,
     "starting_hp": 6,
     "class_items": "A whispering orb or a family heirloom",
@@ -254,10 +237,7 @@
   },
   {
     "name": "Warrior",
-    "domains": [
-      "Blade",
-      "Bone"
-    ],
+    "domains": ["Blade", "Bone"],
     "starting_evasion": 11,
     "starting_hp": 6,
     "class_items": "The drawing of a lover or a sharpening",

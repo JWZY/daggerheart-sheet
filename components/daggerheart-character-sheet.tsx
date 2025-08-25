@@ -7,6 +7,13 @@ import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
 import { Badge } from "@/components/ui/badge"
 import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/select"
+import {
   Dice1,
   Dice2,
   Dice3,
@@ -35,7 +42,7 @@ import { DOMAIN_CARDS } from "@/data/domain-cards"
 import { SearchableSelect } from "./searchable-select"
 import { DefenseHealthCombined } from "./defense-health-combined"
 
-interface CharacterData {
+export interface CharacterData {
   name: string
   pronouns: string
   heritage: string
@@ -203,6 +210,12 @@ export function DaggerheartCharacterSheet() {
   const [rollHistory, setRollHistory] = useState<RollHistory[]>([])
   const [isHistoryOpen, setIsHistoryOpen] = useState(false)
 
+  // Domain card filters
+  const [domainFilter, setDomainFilter] = useState<string>("")
+  const [levelFilter, setLevelFilter] = useState<string>("")
+  const [typeFilter, setTypeFilter] = useState<string>("")
+  const [searchFilter, setSearchFilter] = useState<string>("")
+
   useEffect(() => {
     // Only access localStorage on the client side
     if (typeof window === "undefined") return
@@ -260,6 +273,28 @@ export function DaggerheartCharacterSheet() {
   const updateCharacter = (updates: Partial<CharacterData>) => {
     setCharacter((prev) => ({ ...prev, ...updates }))
   }
+
+  // Get unique domains, levels, and types from DOMAIN_CARDS
+  const uniqueDomains = [
+    ...new Set(DOMAIN_CARDS.map((card) => card.domain)),
+  ].sort()
+  const uniqueLevels = [
+    ...new Set(DOMAIN_CARDS.map((card) => card.level)),
+  ].sort()
+  const uniqueTypes = [...new Set(DOMAIN_CARDS.map((card) => card.type))].sort()
+
+  // Filter domain cards based on current filters
+  const filteredDomainCards = DOMAIN_CARDS.filter((card) => {
+    const matchesDomain = !domainFilter || card.domain === domainFilter
+    const matchesLevel = !levelFilter || card.level === Number(levelFilter)
+    const matchesType = !typeFilter || card.type === typeFilter
+    const matchesSearch =
+      !searchFilter ||
+      card.name.toLowerCase().includes(searchFilter.toLowerCase()) ||
+      card.description.toLowerCase().includes(searchFilter.toLowerCase())
+
+    return matchesDomain && matchesLevel && matchesType && matchesSearch
+  })
 
   const handleClassChange = (className: string) => {
     const selectedClass = DAGGERHEART_CLASSES.find((c) => c.name === className)
@@ -615,28 +650,26 @@ export function DaggerheartCharacterSheet() {
       <div className="mx-auto max-w-4xl space-y-6 pb-20">
         {/* Character Header */}
         <Card className="cyber-card">
-          <CardHeader className="pb-4">
-            <CardTitle className="flex items-center gap-2 font-mono text-xl tracking-wider text-[#00ffff]">
-              <Triangle className="h-5 w-5 text-[#00ffff] drop-shadow-[0_0_8px_rgba(0,255,255,0.8)]" />
-              DAGGERHEART CHARACTER SHEET
-              <Triangle className="h-5 w-5 rotate-180 text-[#00ffff] drop-shadow-[0_0_8px_rgba(0,255,255,0.8)]" />
+          <CardHeader className="pb-2">
+            <CardTitle className="flex items-center gap-2 font-mono text-sm tracking-wider text-[#00ffff]">
+              <Triangle className="h-4 w-4 text-[#00ffff] drop-shadow-[0_0_8px_rgba(0,255,255,0.8)]" />
+              DAGGERHEART CHARACTER
+              <Triangle className="h-4 w-4 rotate-180 text-[#00ffff] drop-shadow-[0_0_8px_rgba(0,255,255,0.8)]" />
             </CardTitle>
           </CardHeader>
-          <CardContent className="space-y-6">
-            <div className="flex flex-col gap-6 lg:flex-row">
+          <CardContent className="space-y-4">
+            <div className="flex flex-col gap-4 lg:flex-row">
               {/* Character Portrait - stacked on top for mobile, left side for desktop */}
               <div className="flex-shrink-0">
-                <div className="flex h-24 w-full items-center justify-center rounded-lg border border-[#00ffff]/30 bg-gradient-to-r from-[#00ffff]/20 to-[#ff00ff]/20 lg:w-24">
+                <div className="flex h-16 w-full items-center justify-center rounded-lg border border-[#00ffff]/30 bg-gradient-to-r from-[#00ffff]/20 to-[#ff00ff]/20 lg:h-20 lg:w-20">
                   <span className="text-center font-sans text-xs text-[#00ffff]/70">
-                    CHARACTER
-                    <br />
                     PORTRAIT
                   </span>
                 </div>
               </div>
 
               {/* Character Info Fields */}
-              <div className="flex-1 space-y-4">
+              <div className="flex-1 space-y-3">
                 {/* Name - full width on mobile */}
                 <div className="space-y-2">
                   <Label
@@ -662,7 +695,7 @@ export function DaggerheartCharacterSheet() {
                       }`}
                     />
                   ) : (
-                    <div className="font-sans text-xl text-[#00ffff]">
+                    <div className="font-sans text-lg text-[#00ffff]">
                       {character.name || "Unnamed Character"}
                     </div>
                   )}
@@ -700,7 +733,7 @@ export function DaggerheartCharacterSheet() {
                       required
                     />
                   ) : (
-                    <div className="font-sans text-xl text-[#00ffff]">
+                    <div className="font-sans text-lg text-[#00ffff]">
                       {character.class || "No Class Selected"}
                     </div>
                   )}
@@ -732,25 +765,18 @@ export function DaggerheartCharacterSheet() {
                     >
                       LEVEL
                     </Label>
-                    <div className="relative">
-                      <Input
-                        id="level"
-                        type="number"
-                        value={character.level}
-                        onChange={(e) =>
-                          updateCharacter({
-                            level: Number.parseInt(e.target.value) || 1,
-                          })
-                        }
-                        min="1"
-                        className="cyber-input text-center font-sans text-2xl font-bold"
-                      />
-                      <div className="absolute -top-2 -right-2 flex h-8 w-8 items-center justify-center rounded-full bg-gradient-to-br from-[#00ffff] to-[#ff00ff]">
-                        <span className="font-sans text-xs font-bold text-black">
-                          {character.level}
-                        </span>
-                      </div>
-                    </div>
+                    <Input
+                      id="level"
+                      type="number"
+                      value={character.level}
+                      onChange={(e) =>
+                        updateCharacter({
+                          level: Number.parseInt(e.target.value) || 1,
+                        })
+                      }
+                      min="1"
+                      className="cyber-input text-center font-sans text-xl font-bold"
+                    />
                   </div>
                 </div>
               </div>
@@ -883,8 +909,16 @@ export function DaggerheartCharacterSheet() {
                   return (
                     <div
                       key={i}
-                      onClick={() => updateHope(i + 1)}
-                      className={`h-10 w-10 cursor-pointer rounded-full border-2 transition-all ${
+                      onClick={() => {
+                        // If clicking the last filled pip, decrease by 1
+                        // Otherwise, set to clicked position
+                        if (i + 1 === character.hope) {
+                          updateHope(i)
+                        } else {
+                          updateHope(i + 1)
+                        }
+                      }}
+                      className={`h-6 w-6 cursor-pointer rounded-full border-2 transition-all ${
                         isFilled
                           ? "hope-dot border-[#ffff00] hover:opacity-80"
                           : "hope-dot-empty hover:bg-[#ffff00]/20"
@@ -1300,23 +1334,79 @@ export function DaggerheartCharacterSheet() {
           </CardHeader>
           <CardContent>
             <div className="space-y-4">
+              {/* Filter Controls */}
+              <div className="grid grid-cols-2 gap-2 md:grid-cols-4">
+                <Select value={domainFilter} onValueChange={setDomainFilter}>
+                  <SelectTrigger className="border-[#00ffff]/30 bg-black/70 text-[#00ffff]">
+                    <SelectValue placeholder="All Domains" />
+                  </SelectTrigger>
+                  <SelectContent className="border-[#00ffff] bg-[#1a1a2e]">
+                    <SelectItem value="">All Domains</SelectItem>
+                    {uniqueDomains.map((domain) => (
+                      <SelectItem key={domain} value={domain}>
+                        {domain}
+                      </SelectItem>
+                    ))}
+                  </SelectContent>
+                </Select>
+
+                <Select value={levelFilter} onValueChange={setLevelFilter}>
+                  <SelectTrigger className="border-[#00ffff]/30 bg-black/70 text-[#00ffff]">
+                    <SelectValue placeholder="All Levels" />
+                  </SelectTrigger>
+                  <SelectContent className="border-[#00ffff] bg-[#1a1a2e]">
+                    <SelectItem value="">All Levels</SelectItem>
+                    {uniqueLevels.map((level) => (
+                      <SelectItem key={level} value={level.toString()}>
+                        Level {level}
+                      </SelectItem>
+                    ))}
+                  </SelectContent>
+                </Select>
+
+                <Select value={typeFilter} onValueChange={setTypeFilter}>
+                  <SelectTrigger className="border-[#00ffff]/30 bg-black/70 text-[#00ffff]">
+                    <SelectValue placeholder="All Types" />
+                  </SelectTrigger>
+                  <SelectContent className="border-[#00ffff] bg-[#1a1a2e]">
+                    <SelectItem value="">All Types</SelectItem>
+                    {uniqueTypes.map((type) => (
+                      <SelectItem key={type} value={type}>
+                        {type}
+                      </SelectItem>
+                    ))}
+                  </SelectContent>
+                </Select>
+
+                <Input
+                  placeholder="Search cards..."
+                  value={searchFilter}
+                  onChange={(e) => setSearchFilter(e.target.value)}
+                  className="border-[#00ffff]/30 bg-black/70 text-[#00ffff] placeholder:text-[#00ffff]/50"
+                />
+              </div>
+
               <div className="flex items-center gap-2">
                 <SearchableSelect
                   value=""
                   onChange={(value) => {
-                    const selectedCard = DOMAIN_CARDS.find(
+                    const selectedCard = filteredDomainCards.find(
                       (card) => card.name === value
                     )
                     if (selectedCard) {
                       addDomainCard(selectedCard)
                     }
                   }}
-                  options={DOMAIN_CARDS.map((card) => ({
+                  options={filteredDomainCards.map((card) => ({
                     value: card.name,
                     label: card.name,
                     description: `${card.domain} • Level ${card.level} • ${card.type}${card.recallCost !== undefined ? ` • Recall: ${card.recallCost}` : ""}`,
                   }))}
-                  placeholder="Add domain card..."
+                  placeholder={
+                    filteredDomainCards.length === 0
+                      ? "No cards match filters"
+                      : "Add domain card..."
+                  }
                   className="flex-1 border border-[#00ffff]/30 bg-black/70 text-[#00ffff]"
                 />
               </div>

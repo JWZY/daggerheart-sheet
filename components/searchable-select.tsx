@@ -2,8 +2,9 @@
 
 import type React from "react"
 import { useState, useRef, useEffect } from "react"
-import { ChevronDown } from "lucide-react"
+import { ChevronDown, X } from "lucide-react"
 import { createPortal } from "react-dom"
+import { useIsMobile } from "@/hooks/use-mobile"
 
 interface Option {
   value: string
@@ -33,6 +34,7 @@ export function SearchableSelect({
   const [isOpen, setIsOpen] = useState(false)
   const [searchTerm, setSearchTerm] = useState("")
   const [highlightedIndex, setHighlightedIndex] = useState(-1)
+  const [expandedOptions, setExpandedOptions] = useState<Set<string>>(new Set())
   const [dropdownPosition, setDropdownPosition] = useState({
     top: 0,
     left: 0,
@@ -42,6 +44,7 @@ export function SearchableSelect({
   const dropdownRef = useRef<HTMLDivElement>(null)
   const containerRef = useRef<HTMLDivElement>(null)
   const [isClient, setIsClient] = useState(false)
+  const isMobile = useIsMobile()
 
   const filteredOptions = options.filter(
     (option) =>
@@ -57,7 +60,7 @@ export function SearchableSelect({
 
   useEffect(() => {
     const updateDropdownPosition = () => {
-      if (containerRef.current && isOpen) {
+      if (containerRef.current && isOpen && !isMobile) {
         const rect = containerRef.current.getBoundingClientRect()
         const viewportHeight = window.innerHeight
         const dropdownHeight = 240 // Max height of dropdown
@@ -88,7 +91,7 @@ export function SearchableSelect({
         window.removeEventListener("scroll", updateDropdownPosition, true)
       }
     }
-  }, [isOpen])
+  }, [isOpen, isMobile])
 
   useEffect(() => {
     const handleClickOutside = (event: MouseEvent) => {
@@ -101,6 +104,7 @@ export function SearchableSelect({
         setIsOpen(false)
         setSearchTerm("")
         setHighlightedIndex(-1)
+        setExpandedOptions(new Set())
       }
     }
 
@@ -144,6 +148,7 @@ export function SearchableSelect({
         setIsOpen(false)
         setSearchTerm("")
         setHighlightedIndex(-1)
+        setExpandedOptions(new Set())
         break
     }
   }
@@ -153,43 +158,118 @@ export function SearchableSelect({
     setIsOpen(false)
     setSearchTerm("")
     setHighlightedIndex(-1)
+    setExpandedOptions(new Set())
+  }
+
+  const toggleDescriptionExpand = (
+    optionValue: string,
+    e: React.MouseEvent
+  ) => {
+    e.stopPropagation()
+    setExpandedOptions((prev) => {
+      const newSet = new Set(prev)
+      if (newSet.has(optionValue)) {
+        newSet.delete(optionValue)
+      } else {
+        newSet.add(optionValue)
+      }
+      return newSet
+    })
   }
 
   const dropdownContent = isOpen && (
     <div
       ref={dropdownRef}
-      style={{
-        position: "fixed",
-        top: `${dropdownPosition.top}px`,
-        left: `${dropdownPosition.left}px`,
-        width: `${dropdownPosition.width}px`,
-        zIndex: 99999,
-      }}
-      className="max-h-60 overflow-y-auto rounded-md border border-[#00ffff] bg-black/95 shadow-lg backdrop-blur-sm"
+      style={
+        isMobile
+          ? {
+              position: "fixed",
+              bottom: 0,
+              left: 0,
+              right: 0,
+              zIndex: 99999,
+            }
+          : {
+              position: "fixed",
+              top: `${dropdownPosition.top}px`,
+              left: `${dropdownPosition.left}px`,
+              width: `${dropdownPosition.width}px`,
+              zIndex: 99999,
+            }
+      }
+      className={
+        isMobile
+          ? "max-h-[70vh] overflow-y-auto rounded-t-2xl border-t border-[#00ffff] bg-black/95 shadow-lg backdrop-blur-sm"
+          : "max-h-60 overflow-y-auto rounded-md border border-[#00ffff] bg-black/95 shadow-lg backdrop-blur-sm"
+      }
     >
+      {isMobile && (
+        <div className="sticky top-0 z-10 flex items-center justify-between border-b border-[#00ffff]/30 bg-black/95 p-4">
+          <h3 className="font-mono text-lg font-medium text-[#00ffff]">
+            {placeholder}
+          </h3>
+          <button
+            onClick={() => {
+              setIsOpen(false)
+              setSearchTerm("")
+              setHighlightedIndex(-1)
+              setExpandedOptions(new Set())
+            }}
+            className="rounded-full p-1 text-[#00ffff] hover:bg-[#00ffff]/10"
+          >
+            <X className="h-6 w-6" />
+          </button>
+        </div>
+      )}
+
       {filteredOptions.length === 0 ? (
-        <div className="px-3 py-2 font-sans text-sm text-[#00ffff]/50">
+        <div
+          className={`font-sans text-sm text-[#00ffff]/50 ${isMobile ? "px-4 py-4" : "px-3 py-2"}`}
+        >
           No options found
         </div>
       ) : (
-        filteredOptions.map((option, index) => (
-          <div
-            key={option.value}
-            onClick={() => handleOptionClick(option.value)}
-            className={`cursor-pointer px-3 py-2 text-sm transition-colors ${
-              index === highlightedIndex
-                ? "bg-[#00ffff]/20 text-[#00ffff]"
-                : "text-[#00ffff] hover:bg-[#00ffff]/10"
-            }`}
-          >
-            <div className="font-mono font-medium">{option.label}</div>
-            {option.description && (
-              <div className="mt-1 font-sans text-[#00ffff]/70">
-                {option.description}
-              </div>
-            )}
-          </div>
-        ))
+        filteredOptions.map((option, index) => {
+          const isExpanded = expandedOptions.has(option.value)
+          const hasLongDescription =
+            option.description && option.description.length > 80
+          const displayDescription =
+            option.description &&
+            (isExpanded || !hasLongDescription
+              ? option.description
+              : option.description.substring(0, 80) + "...")
+
+          return (
+            <div
+              key={option.value}
+              onClick={() => handleOptionClick(option.value)}
+              className={`cursor-pointer transition-colors ${
+                isMobile ? "px-4 py-4" : "px-3 py-2"
+              } text-sm ${
+                index === highlightedIndex
+                  ? "bg-[#00ffff]/20 text-[#00ffff]"
+                  : "text-[#00ffff] hover:bg-[#00ffff]/10"
+              }`}
+            >
+              <div className="font-mono font-medium">{option.label}</div>
+              {option.description && (
+                <div className="mt-1">
+                  <span className="font-sans text-[#00ffff]/70">
+                    {displayDescription}
+                  </span>
+                  {hasLongDescription && (
+                    <button
+                      onClick={(e) => toggleDescriptionExpand(option.value, e)}
+                      className="ml-2 text-xs text-[#00ffff] underline hover:text-[#00ffff]/80"
+                    >
+                      {isExpanded ? "Show less" : "Show more"}
+                    </button>
+                  )}
+                </div>
+              )}
+            </div>
+          )
+        })
       )}
     </div>
   )
@@ -218,7 +298,24 @@ export function SearchableSelect({
         </div>
       </div>
 
-      {isClient && createPortal(dropdownContent, document.body)}
+      {isClient &&
+        createPortal(
+          <>
+            {isOpen && isMobile && (
+              <div
+                className="fixed inset-0 z-[99998] bg-black/50"
+                onClick={() => {
+                  setIsOpen(false)
+                  setSearchTerm("")
+                  setHighlightedIndex(-1)
+                  setExpandedOptions(new Set())
+                }}
+              />
+            )}
+            {dropdownContent}
+          </>,
+          document.body
+        )}
     </>
   )
 }

@@ -2,15 +2,7 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
 import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
 import { Shield, X } from "lucide-react"
-
-interface CharacterData {
-  evasion: number
-  armor: number
-  armorSlots: number
-  hp: { current: number; max: number }
-  stress: { current: number; max: number }
-  damageThresholds: { minor: number; major: number }
-}
+import type { CharacterData } from "./daggerheart-character-sheet"
 
 interface DefenseHealthProps {
   character: CharacterData
@@ -177,32 +169,37 @@ export function DefenseHealthCombined({
                       {character.armor}/{character.armorSlots}
                     </span>
                   </div>
-                  <div className="flex justify-center gap-2">
+                  <div className="flex justify-center gap-1">
                     {Array.from(
                       { length: Math.max(5, character.armorSlots) },
                       (_, i) => {
                         const isActive = i < character.armor
                         const exists = i < character.armorSlots
-                        if (!exists)
-                          return <div key={i} className="h-10 w-10" />
+                        if (!exists) return <div key={i} className="h-6 w-6" />
                         return (
                           <div
                             key={i}
                             className="relative cursor-pointer"
                             onClick={() => {
-                              updateCharacter({ armor: i + 1 })
+                              // If clicking the last filled pip, decrease by 1
+                              // Otherwise, set to clicked position
+                              if (i + 1 === character.armor) {
+                                updateCharacter({ armor: i })
+                              } else {
+                                updateCharacter({ armor: i + 1 })
+                              }
                             }}
                           >
                             <Shield
-                              className={`h-10 w-10 transition-all ${
+                              className={`h-6 w-6 transition-all ${
                                 isActive
-                                  ? "text-[#00ffff] drop-shadow-[0_0_6px_rgba(0,255,255,0.8)]"
+                                  ? "text-[#00ffff] drop-shadow-[0_0_4px_rgba(0,255,255,0.8)]"
                                   : "text-gray-600"
                               }`}
                             />
                             {!isActive && (
                               <div className="absolute inset-0 flex items-center justify-center">
-                                <X className="h-6 w-6 text-red-500" />
+                                <X className="h-4 w-4 text-red-500" />
                               </div>
                             )}
                           </div>
@@ -224,16 +221,14 @@ export function DefenseHealthCombined({
                     </span>
                   </div>
                   <div
-                    className={`grid gap-1 ${
-                      character.hp.max <= 6
-                        ? "grid-cols-6"
-                        : character.hp.max <= 8
-                          ? "grid-cols-8"
-                          : character.hp.max <= 10
-                            ? "grid-cols-10"
-                            : character.hp.max <= 12
-                              ? "grid-cols-12"
-                              : "grid-cols-[repeat(auto-fit,minmax(2rem,1fr))]"
+                    className={`grid gap-0.5 ${
+                      character.hp.max <= 10
+                        ? "grid-cols-10"
+                        : character.hp.max <= 15
+                          ? "grid-cols-[repeat(15,minmax(0,1fr))]"
+                          : character.hp.max <= 20
+                            ? "grid-cols-[repeat(20,minmax(0,1fr))]"
+                            : "grid-cols-[repeat(auto-fit,minmax(1rem,1fr))]"
                     }`}
                   >
                     {Array.from({ length: character.hp.max }, (_, i) => {
@@ -241,8 +236,16 @@ export function DefenseHealthCombined({
                       return (
                         <div
                           key={i}
-                          onClick={() => updateHP(i + 1)}
-                          className={`aspect-square cursor-pointer rounded-sm border transition-all ${
+                          onClick={() => {
+                            // If clicking the last filled pip, decrease by 1
+                            // Otherwise, set to clicked position
+                            if (i + 1 === character.hp.current) {
+                              updateHP(i)
+                            } else {
+                              updateHP(i + 1)
+                            }
+                          }}
+                          className={`h-5 w-5 cursor-pointer rounded-sm border transition-all ${
                             isFilled
                               ? "border-[#ff0040] bg-[#ff0040] hover:bg-[#ff0040]/80"
                               : "border-[#ff0040] bg-transparent hover:bg-[#ff0040]/20"
@@ -262,16 +265,14 @@ export function DefenseHealthCombined({
                     </span>
                   </div>
                   <div
-                    className={`grid gap-1 ${
-                      character.stress.max <= 6
-                        ? "grid-cols-6"
-                        : character.stress.max <= 8
-                          ? "grid-cols-8"
-                          : character.stress.max <= 10
-                            ? "grid-cols-10"
-                            : character.stress.max <= 12
-                              ? "grid-cols-12"
-                              : "grid-cols-[repeat(auto-fit,minmax(2rem,1fr))]"
+                    className={`grid gap-0.5 ${
+                      character.stress.max <= 10
+                        ? "grid-cols-10"
+                        : character.stress.max <= 15
+                          ? "grid-cols-[repeat(15,minmax(0,1fr))]"
+                          : character.stress.max <= 20
+                            ? "grid-cols-[repeat(20,minmax(0,1fr))]"
+                            : "grid-cols-[repeat(auto-fit,minmax(1rem,1fr))]"
                     }`}
                   >
                     {Array.from({ length: character.stress.max }, (_, i) => {
@@ -279,8 +280,16 @@ export function DefenseHealthCombined({
                       return (
                         <div
                           key={i}
-                          onClick={() => updateStress(i + 1)}
-                          className={`aspect-square cursor-pointer rounded-sm border transition-all ${
+                          onClick={() => {
+                            // If clicking the last filled pip, decrease by 1
+                            // Otherwise, set to clicked position
+                            if (i + 1 === character.stress.current) {
+                              updateStress(i)
+                            } else {
+                              updateStress(i + 1)
+                            }
+                          }}
+                          className={`h-5 w-5 cursor-pointer rounded-sm border transition-all ${
                             isFilled
                               ? "border-[#ff8000] bg-[#ff8000] hover:bg-[#ff8000]/80"
                               : "border-[#ff8000] bg-transparent hover:bg-[#ff8000]/20"
