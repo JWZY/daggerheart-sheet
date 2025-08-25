@@ -33,6 +33,7 @@ import {
   Triangle,
   X,
   Settings,
+  Flame,
 } from "lucide-react"
 import { DAGGERHEART_CLASSES } from "@/data/classes"
 import { DAGGERHEART_ANCESTRIES } from "@/data/ancestries"
@@ -626,160 +627,124 @@ export function DaggerheartCharacterSheet() {
 
   return (
     <div className="relative w-full">
-      {/* Mode Toggle Button */}
-      <div className="fixed top-4 right-4 z-50">
-        <Button
-          onClick={() => setIsEditMode(!isEditMode)}
-          className="cyber-button flex items-center gap-2 border-[#00ffff] bg-[#0a0a0f]/90 font-mono text-[#00ffff] hover:bg-[#00ffff]/20"
-          size="sm"
-        >
-          {isEditMode ? (
-            <>
-              <User className="h-4 w-4" />
-              PLAY MODE
-            </>
-          ) : (
-            <>
-              <Settings className="h-4 w-4" />
-              EDIT MODE
-            </>
-          )}
-        </Button>
-      </div>
-
       {/* Main Content - Centered */}
       <div className="mx-auto max-w-4xl space-y-6 pb-20">
-        {/* Character Header */}
+        {/* Compact Character Header */}
         <Card className="cyber-card">
-          <CardHeader className="pb-2">
-            <CardTitle className="flex items-center gap-2 font-mono text-sm tracking-wider text-[#00ffff]">
-              <Triangle className="h-4 w-4 text-[#00ffff] drop-shadow-[0_0_8px_rgba(0,255,255,0.8)]" />
-              DAGGERHEART CHARACTER
-              <Triangle className="h-4 w-4 rotate-180 text-[#00ffff] drop-shadow-[0_0_8px_rgba(0,255,255,0.8)]" />
-            </CardTitle>
-          </CardHeader>
-          <CardContent className="space-y-4">
-            <div className="flex flex-col gap-4 lg:flex-row">
-              {/* Character Portrait - stacked on top for mobile, left side for desktop */}
-              <div className="flex-shrink-0">
-                <div className="flex h-16 w-full items-center justify-center rounded-lg border border-[#00ffff]/30 bg-gradient-to-r from-[#00ffff]/20 to-[#ff00ff]/20 lg:h-20 lg:w-20">
-                  <span className="text-center font-sans text-xs text-[#00ffff]/70">
-                    PORTRAIT
-                  </span>
+          <CardContent className="py-4">
+            <div className="flex items-start justify-between">
+              <div className="flex gap-4">
+                {/* Character Portrait */}
+                <div className="flex-shrink-0">
+                  <div className="flex h-16 w-16 items-center justify-center rounded-lg border border-[#00ffff]/30 bg-gradient-to-r from-[#00ffff]/20 to-[#ff00ff]/20">
+                    <span className="text-center font-sans text-[10px] text-[#00ffff]/70">
+                      PORTRAIT
+                    </span>
+                  </div>
+                </div>
+
+                {/* Character Info */}
+                <div>
+                  {isEditMode ? (
+                    <div className="space-y-2">
+                      <Input
+                        id="name"
+                        value={character.name}
+                        onChange={(e) =>
+                          updateCharacter({ name: e.target.value })
+                        }
+                        placeholder="Enter name"
+                        className={`cyber-input h-8 font-sans text-lg font-bold placeholder:text-[#00ffff]/50 ${
+                          character.name
+                            ? "border border-[#00ffff]"
+                            : "border-2 border-[#ffff00] shadow-[0_0_10px_rgba(255,255,0,0.3)]"
+                        }`}
+                      />
+                      <div className="flex gap-2">
+                        <SearchableSelect
+                          id="class"
+                          value={character.class}
+                          onChange={handleClassChange}
+                          options={[
+                            { value: "", label: "Select Class" },
+                            ...DAGGERHEART_CLASSES.map((classData) => ({
+                              value: classData.name,
+                              label: classData.name,
+                              description: classData.description,
+                            })),
+                          ]}
+                          placeholder="Select Class"
+                          className={`h-8 bg-black/70 text-[#00ffff] ${
+                            character.class
+                              ? "border border-[#00ffff]"
+                              : "border-2 border-[#ffff00] shadow-[0_0_10px_rgba(255,255,0,0.3)]"
+                          }`}
+                          required
+                        />
+                        <Input
+                          id="subclass"
+                          value={character.subclass || ""}
+                          onChange={(e) =>
+                            updateCharacter({ subclass: e.target.value })
+                          }
+                          placeholder="Subclass"
+                          className="cyber-input h-8 w-32 font-sans text-sm placeholder:text-[#00ffff]/50"
+                        />
+                        <Input
+                          id="level"
+                          type="number"
+                          value={character.level}
+                          onChange={(e) =>
+                            updateCharacter({
+                              level: Number.parseInt(e.target.value) || 1,
+                            })
+                          }
+                          min="1"
+                          className="cyber-input h-8 w-16 text-center font-sans text-sm"
+                        />
+                      </div>
+                    </div>
+                  ) : (
+                    <>
+                      <h1 className="font-sans text-2xl font-bold text-[#00ffff]">
+                        {character.name || "Unnamed Character"}
+                      </h1>
+                      <p className="font-sans text-sm text-[#00ffff]/70">
+                        {character.ancestry?.name || "Unknown Ancestry"}{" "}
+                        {character.class || "No Class"}{" "}
+                        {character.subclass ? `(${character.subclass})` : ""} •
+                        Level {character.level}
+                      </p>
+                    </>
+                  )}
                 </div>
               </div>
 
-              {/* Character Info Fields */}
-              <div className="flex-1 space-y-3">
-                {/* Name - full width on mobile */}
-                <div className="space-y-2">
-                  <Label
-                    htmlFor="name"
-                    className={`font-mono text-sm font-bold tracking-wide ${
-                      character.name ? "text-[#00ffff]" : "text-[#ffff00]"
-                    }`}
-                  >
-                    NAME {isEditMode && "*"}
-                  </Label>
+              {/* Action Buttons */}
+              <div className="flex gap-2">
+                <Button
+                  onClick={() => {}}
+                  className="cyber-button h-8 w-8 border-[#00ffff] bg-[#0a0a0f]/90 p-0 text-[#00ffff] hover:bg-[#00ffff]/20"
+                  title="Downtime"
+                >
+                  <Flame className="h-4 w-4" />
+                </Button>
+                <Button
+                  onClick={() => setIsEditMode(!isEditMode)}
+                  className="cyber-button flex h-8 items-center gap-1 border-[#00ffff] bg-[#0a0a0f]/90 px-2 font-mono text-xs text-[#00ffff] hover:bg-[#00ffff]/20"
+                >
                   {isEditMode ? (
-                    <Input
-                      id="name"
-                      value={character.name}
-                      onChange={(e) =>
-                        updateCharacter({ name: e.target.value })
-                      }
-                      placeholder="Enter name"
-                      className={`cyber-input font-sans placeholder:text-[#00ffff]/50 ${
-                        character.name
-                          ? "border border-[#00ffff]"
-                          : "border-2 border-[#ffff00] shadow-[0_0_10px_rgba(255,255,0,0.3)]"
-                      }`}
-                    />
+                    <>
+                      <User className="h-3 w-3" />
+                      PLAY
+                    </>
                   ) : (
-                    <div className="font-sans text-lg text-[#00ffff]">
-                      {character.name || "Unnamed Character"}
-                    </div>
+                    <>
+                      <Settings className="h-3 w-3" />
+                      EDIT
+                    </>
                   )}
-                </div>
-
-                {/* Class - full width on mobile */}
-                <div className="space-y-2">
-                  <Label
-                    htmlFor="class"
-                    className={`font-mono text-sm font-bold tracking-wide ${
-                      character.class ? "text-[#00ffff]" : "text-[#ffff00]"
-                    }`}
-                  >
-                    CLASS {isEditMode && "*"}
-                  </Label>
-                  {isEditMode ? (
-                    <SearchableSelect
-                      id="class"
-                      value={character.class}
-                      onChange={handleClassChange}
-                      options={[
-                        { value: "", label: "Select Class" },
-                        ...DAGGERHEART_CLASSES.map((classData) => ({
-                          value: classData.name,
-                          label: classData.name,
-                          description: classData.description,
-                        })),
-                      ]}
-                      placeholder="Select Class"
-                      className={`bg-black/70 text-[#00ffff] ${
-                        character.class
-                          ? "border border-[#00ffff]"
-                          : "border-2 border-[#ffff00] shadow-[0_0_10px_rgba(255,255,0,0.3)]"
-                      }`}
-                      required
-                    />
-                  ) : (
-                    <div className="font-sans text-lg text-[#00ffff]">
-                      {character.class || "No Class Selected"}
-                    </div>
-                  )}
-                </div>
-
-                {/* Subclass and Level - share row on mobile and desktop */}
-                <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
-                  <div className="space-y-2">
-                    <Label
-                      htmlFor="subclass"
-                      className="font-mono text-sm tracking-wide text-[#00ffff]"
-                    >
-                      SUBCLASS
-                    </Label>
-                    <Input
-                      id="subclass"
-                      value={character.subclass || ""}
-                      onChange={(e) =>
-                        updateCharacter({ subclass: e.target.value })
-                      }
-                      placeholder="Enter subclass"
-                      className="cyber-input font-sans placeholder:text-[#00ffff]/50"
-                    />
-                  </div>
-                  <div className="space-y-2">
-                    <Label
-                      htmlFor="level"
-                      className="font-mono text-sm tracking-wide text-[#00ffff]"
-                    >
-                      LEVEL
-                    </Label>
-                    <Input
-                      id="level"
-                      type="number"
-                      value={character.level}
-                      onChange={(e) =>
-                        updateCharacter({
-                          level: Number.parseInt(e.target.value) || 1,
-                        })
-                      }
-                      min="1"
-                      className="cyber-input text-center font-sans text-xl font-bold"
-                    />
-                  </div>
-                </div>
+                </Button>
               </div>
             </div>
           </CardContent>
@@ -891,19 +856,14 @@ export function DaggerheartCharacterSheet() {
 
         <Card className="cyber-border bg-gradient-to-b from-[#0a0a0f]/90 to-[#1a1a2e]/90 backdrop-blur-sm">
           <CardHeader>
-            <CardTitle className="flex items-center gap-3 font-mono tracking-wide text-[#ffff00]">
-              HOPE
+            <CardTitle className="flex items-center justify-between font-mono tracking-wide text-[#ffff00]">
+              <span>HOPE</span>
+              <span className="text-sm font-normal">{character.hope}/6</span>
             </CardTitle>
           </CardHeader>
           <CardContent className="space-y-4">
             {/* Hope Pips */}
             <div>
-              <div className="mb-2 flex items-center justify-between">
-                <span className="text-xs text-[#ffff00]">HOPE</span>
-                <span className="text-xs text-[#ffff00]/70">
-                  {character.hope}/6
-                </span>
-              </div>
               <div className="flex justify-center gap-2">
                 {Array.from({ length: 6 }, (_, i) => {
                   const isFilled = i < character.hope
@@ -1094,7 +1054,7 @@ export function DaggerheartCharacterSheet() {
               </div>
             ))}
             {character.weapons.length === 0 && (
-              <p className="py-8 text-center font-sans text-[#00ffff]/70">
+              <p className="py-4 text-center font-sans text-sm text-[#00ffff]/50">
                 No weapons equipped
               </p>
             )}
@@ -1112,13 +1072,15 @@ export function DaggerheartCharacterSheet() {
                 />
                 ACTIVE ARMOR
               </CardTitle>
-              <Button
-                onClick={addActiveArmor}
-                className="cyber-button font-sans text-[#00ffff]"
-              >
-                <Plus className="mr-2 h-4 w-4" />
-                ADD ARMOR
-              </Button>
+              {isEditMode && (
+                <Button
+                  onClick={addActiveArmor}
+                  className="cyber-button font-sans text-[#00ffff]"
+                >
+                  <Plus className="mr-2 h-4 w-4" />
+                  ADD ARMOR
+                </Button>
+              )}
             </div>
           </CardHeader>
           <CardContent className="space-y-4">
@@ -1234,7 +1196,7 @@ export function DaggerheartCharacterSheet() {
               </div>
             ))}
             {character.activeArmor.length === 0 && (
-              <p className="py-8 text-center font-sans text-[#00ffff]/70">
+              <p className="py-4 text-center font-sans text-sm text-[#00ffff]/50">
                 No armor equipped
               </p>
             )}
@@ -1252,13 +1214,15 @@ export function DaggerheartCharacterSheet() {
                 />
                 EXPERIENCE
               </CardTitle>
-              <Button
-                onClick={addExperience}
-                className="cyber-button font-sans text-[#00ffff]"
-              >
-                <Plus className="mr-2 h-4 w-4" />
-                ADD EXPERIENCE
-              </Button>
+              {isEditMode && (
+                <Button
+                  onClick={addExperience}
+                  className="cyber-button font-sans text-[#00ffff]"
+                >
+                  <Plus className="mr-2 h-4 w-4" />
+                  ADD EXPERIENCE
+                </Button>
+              )}
             </div>
           </CardHeader>
           <CardContent className="space-y-4">
@@ -1310,7 +1274,7 @@ export function DaggerheartCharacterSheet() {
               </div>
             ))}
             {character.experiences.length === 0 && (
-              <p className="py-8 text-center font-sans text-[#00ffff]/70">
+              <p className="py-4 text-center font-sans text-sm text-[#00ffff]/50">
                 No experiences recorded
               </p>
             )}
@@ -1338,10 +1302,10 @@ export function DaggerheartCharacterSheet() {
               {/* Filter Controls */}
               <div className="grid grid-cols-2 gap-2 md:grid-cols-4">
                 <Select value={domainFilter} onValueChange={setDomainFilter}>
-                  <SelectTrigger className="border-[#00ffff]/30 bg-black/70 text-[#00ffff]">
+                  <SelectTrigger className="cyber-input">
                     <SelectValue placeholder="All Domains" />
                   </SelectTrigger>
-                  <SelectContent className="border-[#00ffff] bg-[#1a1a2e]">
+                  <SelectContent>
                     <SelectItem value="all">All Domains</SelectItem>
                     {uniqueDomains.map((domain) => (
                       <SelectItem key={domain} value={domain}>
@@ -1352,10 +1316,10 @@ export function DaggerheartCharacterSheet() {
                 </Select>
 
                 <Select value={levelFilter} onValueChange={setLevelFilter}>
-                  <SelectTrigger className="border-[#00ffff]/30 bg-black/70 text-[#00ffff]">
+                  <SelectTrigger className="cyber-input">
                     <SelectValue placeholder="All Levels" />
                   </SelectTrigger>
-                  <SelectContent className="border-[#00ffff] bg-[#1a1a2e]">
+                  <SelectContent>
                     <SelectItem value="all">All Levels</SelectItem>
                     {uniqueLevels.map((level) => (
                       <SelectItem key={level} value={level.toString()}>
@@ -1366,10 +1330,10 @@ export function DaggerheartCharacterSheet() {
                 </Select>
 
                 <Select value={typeFilter} onValueChange={setTypeFilter}>
-                  <SelectTrigger className="border-[#00ffff]/30 bg-black/70 text-[#00ffff]">
+                  <SelectTrigger className="cyber-input">
                     <SelectValue placeholder="All Types" />
                   </SelectTrigger>
-                  <SelectContent className="border-[#00ffff] bg-[#1a1a2e]">
+                  <SelectContent>
                     <SelectItem value="all">All Types</SelectItem>
                     {uniqueTypes.map((type) => (
                       <SelectItem key={type} value={type}>
@@ -1383,7 +1347,7 @@ export function DaggerheartCharacterSheet() {
                   placeholder="Search cards..."
                   value={searchFilter}
                   onChange={(e) => setSearchFilter(e.target.value)}
-                  className="border-[#00ffff]/30 bg-black/70 text-[#00ffff] placeholder:text-[#00ffff]/50"
+                  className="cyber-input placeholder:text-[#00ffff]/50"
                 />
               </div>
 
@@ -1408,7 +1372,7 @@ export function DaggerheartCharacterSheet() {
                       ? "No cards match filters"
                       : "Add domain card..."
                   }
-                  className="flex-1 border border-[#00ffff]/30 bg-black/70 text-[#00ffff]"
+                  className="cyber-input flex-1"
                 />
               </div>
 
@@ -1459,7 +1423,7 @@ export function DaggerheartCharacterSheet() {
               )}
 
               {character.domainCards.length === 0 && (
-                <p className="py-8 text-center font-sans text-[#00ffff]/70">
+                <p className="py-4 text-center font-sans text-sm text-[#00ffff]/50">
                   No domain cards selected
                 </p>
               )}
