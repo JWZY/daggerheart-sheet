@@ -1,1 +1,320 @@
-[]
+[
+  {
+    "name": "Druid",
+    "domains": [
+      "Sage",
+      "Arcana"
+    ],
+    "starting_evasion": 10,
+    "starting_hp": 6,
+    "class_items": "A small bag of rocks and bones or a",
+    "hope_feature": null,
+    "class_features": [
+      {
+        "title": "Beastform",
+        "text": "Mark a Stress to magically transform into a \nAsk your fellow players one of the following questions for creature of your tier or lower from the Beastform list. You \ntheir character to answer, or create your own questions. can drop out of this form at any time. While transformed, \nyou can\u2019t use weapons or cast spells from domain cards, \n\u2022 What made you realize we were going to be such \nbut you can still use other features or abilities you have \ngood friends?\naccess to. Spells you cast before you transform stay \n\u2022 What do I do that annoys you? active and last for their normal duration, and you can talk \nand communicate as normal. Additionally, you gain the \n\u2022 Why do you grab my hand at night?\nBeastform\u2019s features, add their Evasion bonus to your \nEvasion, and use the trait specified in their statistics for \nyour attack. While you\u2019re in a Beastform, your armor \nbecomes part of your body and you mark Armor Slots as \nusual; when you drop out of a Beastform, those marked \nArmor Slots remain marked. If you mark your last Hit Point, \nyou automatically drop out of this form."
+      },
+      {
+        "title": "Wildtouch",
+        "text": "You can perform harmless, subtle effects that \ninvolve nature\u2014such as causing a flower to rapidly grow, \nsummoning a slight gust of wind, or starting a campfire\u2014\nat will.\n10 Daggerheart SRD"
+      }
+    ],
+    "subclasses": [
+      {
+        "name": "Spellcast Trait",
+        "spellcast_trait": "Clarity",
+        "foundation": [
+          {
+            "title": "SPELLCAST TRAIT Clarity of Nature",
+            "text": "Once per long rest, you can create a \nspace of natural serenity within Close range. When you \nInstinct spend a few minutes resting within the space, clear Stress \nequal to your Instinct, distributed as you choose between \nFOUNDATION FEATURE you and your allies."
+          },
+          {
+            "title": "Elemental Incarnation",
+            "text": "Mark a Stress to Channel one of the Regeneration: Touch a creature and spend 3 Hope. That \nfollowing elements until you take Severe damage or until creature clears 1d4 Hit Points.\nyour next rest:"
+          }
+        ],
+        "specialization": [],
+        "mastery": []
+      }
+    ],
+    "background_questions": [
+      "Who from your community taught you to have such",
+      "You were in love once. Who did you adore, and how",
+      "You\u2019ve always looked up to another bard. Who are raise by +1 until you drop out of that Beastform."
+    ],
+    "connection_questions": [
+      "What made you realize we were going to be such",
+      "What do I do that annoys you? active and last for their normal duration, and you can talk",
+      "Why do you grab my hand at night?"
+    ]
+  },
+  {
+    "name": "Guardian",
+    "domains": [
+      "Valor and Blade"
+    ],
+    "starting_evasion": 9,
+    "starting_hp": 7,
+    "class_items": "A totem from your mentor or a secret key",
+    "hope_feature": null,
+    "class_features": [
+      {
+        "title": "Unstoppable",
+        "text": "Once per long rest, you can become \nUnstoppable. You gain an Unstoppable Die. At level 1, your"
+      }
+    ],
+    "subclasses": [],
+    "background_questions": [
+      "Who from your community did you fail to protect,",
+      "You\u2019ve been tasked with protecting something",
+      "You consider an aspect of yourself to be a weakness.",
+      "How did I save your life the first time we met?",
+      "What small gift did you give me that you notice I",
+      "What lie have you told me about yourself that I"
+    ],
+    "connection_questions": [
+      "How did I save your life the first time we met?",
+      "What small gift did you give me that you notice I",
+      "What lie have you told me about yourself that I"
+    ]
+  },
+  {
+    "name": "Ranger",
+    "domains": [
+      "Bone",
+      "Sage"
+    ],
+    "starting_evasion": 12,
+    "starting_hp": 6,
+    "class_items": "A trophy from your first kill or a seemingly",
+    "hope_feature": {
+      "title": "MASTERY FEATURE\nattack with a weapon to use that same roll against two \nNemesis",
+      "text": "Spend 2 Hope to Prioritize an adversary until your additional adversaries within range of the attack.\nnext rest. When you make an attack against your Prioritized \nadversary, you can swap the results of your Hope and Fear \nDice. You can only Prioritize one adversary at a time.\n16 Daggerheart SRD",
+      "cost_hope": 2
+    },
+    "class_features": [
+      {
+        "title": "Ranger\u2019s Focus",
+        "text": "Spend a Hope and make an attack against Play the Wayfinder if you want to hunt your prey and strike \na target. On a success, deal your attack\u2019s normal damage with deadly force.\nand temporarily make the attack\u2019s target your Focus. Until \nthis feature ends or you make a different creature your SPELLCAST TRAIT\nFocus, you gain the following benefits against your Focus:\nAgility\n\u2022 You know precisely what direction they are in."
+      }
+    ],
+    "subclasses": [
+      {
+        "name": "Beastbound",
+        "spellcast_trait": "The",
+        "foundation": [],
+        "specialization": [
+          {
+            "title": "Elusive Predator",
+            "text": "When your Focus makes an attack \nagainst you, you gain a +2 bonus to your Evasion against \nSPELLCAST TRAIT the attack.\nAgility"
+          }
+        ],
+        "mastery": []
+      },
+      {
+        "name": "Mastery Feature",
+        "spellcast_trait": null,
+        "foundation": [
+          {
+            "title": "Apex Predator",
+            "text": "Before you make an attack roll against your \nFocus, you can spend a Hope. On a successful attack, you"
+          },
+          {
+            "title": "Companion",
+            "text": "You have an animal companion of your choice \nremove a Fear from the GM\u2019s Fear pool.\n(at the GM\u2019s discretion). They stay by your side unless you \ntell them otherwise.\nTake the Ranger Companion sheet. When you level up your BACKGROUND QUESTIONS\ncharacter, choose a level-up option for your companion \nAnswer any of the following background questions. You can \nfrom this sheet as well.\nalso create your own questions."
+          }
+        ],
+        "specialization": [
+          {
+            "title": "Expert Training",
+            "text": "Choose an additional level-up option for \nunique trail or sign do they leave behind?\nyour companion.\n\u2022 Your first kill almost killed you, too. What was it,"
+          },
+          {
+            "title": "Battle-Bonded",
+            "text": "When an adversary attacks you while \nand what part of you was never the same after that \nthey\u2019re within your companion\u2019s Melee range, you gain a +2 \nevent?\nbonus to your Evasion against the attack. \n\u2022 You\u2019ve traveled many dangerous lands, but what is"
+          }
+        ],
+        "mastery": [
+          {
+            "title": "Advanced Training",
+            "text": "Choose two additional level-up options \nfor your companion."
+          }
+        ]
+      }
+    ],
+    "background_questions": [
+      "A terrible creature hurt your community, and you\u2019ve",
+      "Your first kill almost killed you, too. What was it,",
+      "You\u2019ve traveled many dangerous lands, but what is"
+    ],
+    "connection_questions": [
+      "What friendly competition do we have?",
+      "Why do you act differently when we\u2019re alone than",
+      "What threat have you asked me to watch for, and"
+    ]
+  },
+  {
+    "name": "Rogue",
+    "domains": [
+      "Midnight",
+      "Grace"
+    ],
+    "starting_evasion": 12,
+    "starting_hp": 6,
+    "class_items": "A set of forgery tools or a grappling hook",
+    "hope_feature": {
+      "title": "Close range. Anyone in this cloud can\u2019t see outside of it, \nRogue\u2019s Dodge",
+      "text": "Spend 3 Hope to gain a +2 bonus to your \nand anyone outside of it can\u2019t see in. You\u2019re considered \nEvasion until the next time an attack succeeds against you. \nCloaked from any adversary for whom the cloud blocks line \nOtherwise, this bonus lasts until your next rest.\nof sight.",
+      "cost_hope": 3
+    },
+    "class_features": [
+      {
+        "title": "Adrenaline",
+        "text": "While you're Vulnerable, add your level to your \ndamage rolls."
+      },
+      {
+        "title": "Cloaked",
+        "text": "Any time you would be Hidden, you are instead \nCloaked. In addition to the benefits of the Hidden condition,"
+      }
+    ],
+    "subclasses": [],
+    "background_questions": [],
+    "connection_questions": [
+      "What did I recently convince you to do that got us"
+    ]
+  },
+  {
+    "name": "Seraph",
+    "domains": [
+      "Splendor",
+      "Valor"
+    ],
+    "starting_evasion": 9,
+    "starting_hp": 7,
+    "class_items": "A bundle of offerings or a sigil of your god",
+    "hope_feature": null,
+    "class_features": [
+      {
+        "title": "Prayer Dice",
+        "text": "At the beginning of each session, roll a number \nback you up. You can roll a d20 as your Hope Die.\nof d4s equal to your subclass\u2019s Spellcast trait and place \nthem on your character sheet in the space provided. These \nare your Prayer Dice. You can spend any number of Prayer"
+      }
+    ],
+    "subclasses": [
+      {
+        "name": "Background Questions",
+        "spellcast_trait": "Answer",
+        "foundation": [
+          {
+            "title": "Spirit Weapon",
+            "text": "When you have an equipped weapon with \nof desperation?\na range of Melee or Very Close, it can fly from your hand \nto attack an adversary within Close range and then return \u2022 How did your appearance change after taking your \nto you. You can mark a Stress to target an additional oath?\nadversary within range with the same attack roll.\n\u2022 In what strange or unique way do you communicate"
+          },
+          {
+            "title": "Sparing Touch",
+            "text": "Once per long rest, touch a creature and with your god?\nclear 2 Hit Points or 2 Stress from them."
+          }
+        ],
+        "specialization": [],
+        "mastery": []
+      }
+    ],
+    "background_questions": [
+      "What did you get caught doing that got you exiled Dice.",
+      "You used to have a different life, but you\u2019ve tried to",
+      "Who from your past were you most sad to say"
+    ],
+    "connection_questions": [
+      "What promise did you make me agree to, should you",
+      "Why do you ask me so many questions about my",
+      "You\u2019ve told me to protect one member of our party"
+    ]
+  },
+  {
+    "name": "Sorcerer",
+    "domains": [
+      "Arcana",
+      "Midnight"
+    ],
+    "starting_evasion": 10,
+    "starting_hp": 6,
+    "class_items": "A whispering orb or a family heirloom",
+    "hope_feature": {
+      "title": "Volatile Magic",
+      "text": "Spend 3 Hope to reroll any number of your you from harm. When an attack roll against you succeeds, \ndamage dice on an attack that deals magic damage. you can mark a Stress and describe how you use your \nelement to defend you. When you do, roll a d6 and add its",
+      "cost_hope": 3
+    },
+    "class_features": [
+      {
+        "title": "Arcane Sense",
+        "text": "You can sense the presence of magical"
+      }
+    ],
+    "subclasses": [],
+    "background_questions": [],
+    "connection_questions": []
+  },
+  {
+    "name": "Warrior",
+    "domains": [
+      "Blade",
+      "Bone"
+    ],
+    "starting_evasion": 11,
+    "starting_hp": 6,
+    "class_items": "The drawing of a lover or a sharpening",
+    "hope_feature": {
+      "title": "No Mercy",
+      "text": "Spend 3 Hope to gain a +1 bonus to your attack \nmagic, and why are they no longer able to guide you?\nrolls until your next rest. \n\u2022 You have a deep fear you hide from everyone. What is \nit, and why does it scare you? CLASS FEATURES\nCONNECTIONS Attack of Opportunity: If an adversary within Melee range \nattempts to leave that range, make a reaction roll using \nAsk your fellow players one of the following questions for a trait of your choice against their Difficulty. Choose one \ntheir character to answer, or create your own questions. effect on a success, or two if you critically succeed:\n\u2022 Why do you trust me so deeply? \u2022 They can\u2019t move from where they are.\n\u2022 You deal damage to them equal to your primary \n\u2022 What did I do that makes you cautious around me?\nweapon\u2019s damage.\n\u2022 Why do we keep our shared past a secret?\n\u2022 You move with them.\nCombat Training: You ignore burden when equipping \nweapons. When you deal physical damage, you gain a \nbonus to your damage roll equal to your level.\nDaggerheart SRD 23\nMASTERY FEATURE\nWARRIOR SUBCLASSES\nMartial Preparation: You\u2019re an inspirational warrior to all \nChoose either the Call of the Brave or Call of the Slayer \nwho travel with you. Your party gains access to the Martial \nsubclass.\nPreparation downtime move. To use this move during a \nrest, describe how you instruct and train with your party. \nYou and each ally who chooses this downtime move gain a \nCALL OF THE BRAVE\nd6 Slayer Die. A PC with a Slayer Die can spend it to roll the \nPlay the Call of the Brave if you want to use the might of your die and add the result to an attack or damage roll of their \nenemies to fuel your own power. choice.\nFOUNDATION FEATURES\nBACKGROUND QUESTIONS\nCourage: When you fail a roll with Fear, you gain a Hope.\nAnswer any of the following background questions. You can \nBattle Ritual: Once per long rest, before you attempt \nalso create your own questions.\nsomething incredibly dangerous or face off against a foe \nwho clearly outmatches you, describe what ritual you \u2022 Who taught you to fight, and why did they stay \nperform or preparations you make. When you do, clear 2 behind when you left home?\nStress and gain 2 Hope. \n\u2022 Somebody defeated you in battle years ago and left \nSPECIALIZATION FEATURE you to die. Who was it, and how did they betray you?\n\u2022 What legendary place have you always wanted to \nRise to the Challenge: You are vigilant in the face of \nvisit, and why is it so special?\nmounting danger. While you have 2 or fewer Hit Points \nunmarked, you can roll a d20 as your Hope Die.\nCONNECTIONS\nMASTERY FEATURE\nAsk your fellow players one of the following questions for \nCamaraderie: Your unwavering bravery is a rallying their character to answer, or create your own questions.\npoint for your allies. You can initiate a Tag Team Roll one \n\u2022 We knew each other long before this party came \nadditional time per session. Additionally, when an ally \ntogether. How?\ninitiates a Tag Team Roll with you, they only need to spend \n2 Hope to do so. \u2022 What mundane task do you usually help me with off \nthe battlefield?\nCALL OF THE SLAYER \u2022 What fear am I helping you overcome?\nPlay the Call of the Slayer if you want to strike down \nadversaries with immense force.\nFOUNDATION FEATURE\nSlayer: You gain a pool of dice called Slayer Dice. On a \nroll with Hope, you can place a d6 on this card instead of \ngaining a Hope, adding the die to the pool. You can store \na number of Slayer Dice equal to your Proficiency. When \nyou make an attack roll or damage roll, you can spend \nany number of these Slayer Dice, rolling them and adding \ntheir result to the roll. At the end of each session, clear any \nunspent Slayer Dice on this card and gain a Hope per die \ncleared.\nSPECIALIZATION FEATURE\nWeapon Specialist: You can wield multiple weapons with \ndangerous ease. When you succeed on an attack, you can \nspend a Hope to add one of the damage dice from your \nsecondary weapon to the damage roll. Additionally, once \nper long rest when you roll your Slayer Dice, reroll any 1s.\n24 Daggerheart SRD\nWIZARD WIZARD SUBCLASSES\nChoose either the School of Knowledge or School of War \nWhether through an institution or individual study, those subclass.\nknown as wizards acquire and hone immense magical power \nover years of learning using a variety of tools, including books, \nstones, potions, and herbs. Some wizards dedicate their lives SCHOOL OF KNOWLEDGE\nto mastering a particular school of magic, while others learn \nPlay the School of Knowledge if you want a keen \nfrom a wide variety of disciplines. Many wizards become \nunderstanding of the world around you.\nwise and powerful figures in their communities, advising \nrulers, providing medicines and healing, and even leading war \nSPELLCAST TRAIT\ncouncils. While these mages all work toward the common goal \nof collecting magical knowledge, wizards often have the most Knowledge\nconflict within their own ranks, as the acquisition, keeping, \nand sharing of powerful secrets is a topic of intense debate FOUNDATION FEATURES\nthat has resulted in innumerable deaths.\nPrepared: Take an additional domain card of your level or \nlower from a domain you have access to.\nDOMAINS - Codex & Splendor Adept: When you Utilize an Experience, you can mark a \nStress instead of spending a Hope. If you do, double your \nSTARTING EVASION - 11 Experience modifier for that roll.\nSTARTING HIT POINTS - 5 SPECIALIZATION FEATURES\nCLASS ITEMS - A book you\u2019re trying to translate or a tiny, Accomplished: Take an additional domain card of your level \nharmless elemental pet or lower from a domain you have access to.\nPerfect Recall: Once per rest, when you recall a domain \ncard in your vault, you can reduce its Recall Cost by 1.\nWIZARD\u2019S HOPE FEATURE\nMASTERY FEATURES\nNot This Time: Spend 3 Hope to force an adversary within \nFar range to reroll an attack or damage roll. Brilliant: Take an additional domain card of your level or \nlower from a domain you have access to.",
+      "cost_hope": 3
+    },
+    "class_features": [
+      {
+        "title": "CONNECTIONS Attack of Opportunity",
+        "text": "If an adversary within Melee range \nattempts to leave that range, make a reaction roll using \nAsk your fellow players one of the following questions for a trait of your choice against their Difficulty. Choose one \ntheir character to answer, or create your own questions. effect on a success, or two if you critically succeed:\n\u2022 Why do you trust me so deeply? \u2022 They can\u2019t move from where they are.\n\u2022 You deal damage to them equal to your primary \n\u2022 What did I do that makes you cautious around me?\nweapon\u2019s damage.\n\u2022 Why do we keep our shared past a secret?\n\u2022 You move with them."
+      },
+      {
+        "title": "Combat Training",
+        "text": "You ignore burden when equipping \nweapons. When you deal physical damage, you gain a \nbonus to your damage roll equal to your level.\nDaggerheart SRD 23"
+      }
+    ],
+    "subclasses": [
+      {
+        "name": "Spellcast Trait",
+        "spellcast_trait": null,
+        "foundation": [
+          {
+            "title": "Prepared",
+            "text": "Take an additional domain card of your level or \nlower from a domain you have access to.\nDOMAINS - Codex & Splendor Adept: When you Utilize an Experience, you can mark a \nStress instead of spending a Hope. If you do, double your \nSTARTING EVASION - 11 Experience modifier for that roll.\nSTARTING HIT POINTS - 5"
+          }
+        ],
+        "specialization": [
+          {
+            "title": "Accomplished",
+            "text": "Take an additional domain card of your level \nharmless elemental pet or lower from a domain you have access to."
+          },
+          {
+            "title": "Perfect Recall",
+            "text": "Once per rest, when you recall a domain \ncard in your vault, you can reduce its Recall Cost by 1."
+          }
+        ],
+        "mastery": []
+      }
+    ],
+    "background_questions": [
+      "What did you do that made the people in your",
+      "What mentor taught you to control your untamed",
+      "You have a deep fear you hide from everyone. What is",
+      "Why do you trust me so deeply? \u2022 They can\u2019t move from where they are.",
+      "You deal damage to them equal to your primary",
+      "What did I do that makes you cautious around me?",
+      "Why do we keep our shared past a secret?",
+      "You move with them."
+    ],
+    "connection_questions": [
+      "Why do you trust me so deeply? \u2022 They can\u2019t move from where they are.",
+      "You deal damage to them equal to your primary",
+      "What did I do that makes you cautious around me?",
+      "Why do we keep our shared past a secret?",
+      "You move with them."
+    ]
+  }
+]

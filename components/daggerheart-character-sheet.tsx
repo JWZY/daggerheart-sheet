@@ -13,11 +13,9 @@ import {
   Dice4,
   Dice5,
   Dice6,
-  Heart,
   Shield,
   Plus,
   Minus,
-  Activity,
   User,
   Brain,
   Star,
@@ -527,16 +525,25 @@ export function DaggerheartCharacterSheet() {
     setIsHistoryOpen(true)
   }
 
+  const getCharacterTier = (level: number): number => {
+    // L1 = Tier 1, L2-4 = Tier 2, L5-7 = Tier 3, L8-10 = Tier 4
+    if (level === 1) return 1
+    if (level >= 2 && level <= 4) return 2
+    if (level >= 5 && level <= 7) return 3
+    if (level >= 8 && level <= 10) return 4
+    return Math.ceil(level / 3) // fallback for levels above 10
+  }
+
   const rollDamageDice = (damageString: string, weaponName: string) => {
-    // Parse damage string (e.g., "1d8", "2d6+2")
-    const match = damageString.match(/(\d+)d(\d+)([+-]\d+)?/)
+    // Extract die type from damage string (e.g., "d8" from "1d8" or "d8")
+    const match = damageString.match(/d(\d+)/)
     if (!match) return
 
-    const numDice = parseInt(match[1])
-    const dieSize = parseInt(match[2])
-    const modifier = match[3] ? parseInt(match[3]) : 0
+    const dieSize = parseInt(match[1])
+    const tier = getCharacterTier(character.level)
+    const numDice = tier
 
-    let total = modifier
+    let total = 0
     const rolls: number[] = []
 
     for (let i = 0; i < numDice; i++) {
@@ -546,7 +553,7 @@ export function DaggerheartCharacterSheet() {
     }
 
     const rollType = `${weaponName} Damage`
-    const outcome = `Damage: ${rolls.join(" + ")}${modifier !== 0 ? ` ${modifier >= 0 ? "+" : ""}${modifier}` : ""} = ${total}`
+    const outcome = `Damage: ${numDice}d${dieSize} = ${rolls.join(" + ")} = ${total}`
 
     // Create a simplified history entry for damage rolls
     const historyEntry: RollHistory = {
@@ -587,7 +594,7 @@ export function DaggerheartCharacterSheet() {
       <div className="fixed top-4 right-4 z-50">
         <Button
           onClick={() => setIsEditMode(!isEditMode)}
-          className="cyber-button bg-[#0a0a0f]/90 border-[#00ffff] text-[#00ffff] hover:bg-[#00ffff]/20 font-mono flex items-center gap-2"
+          className="cyber-button flex items-center gap-2 border-[#00ffff] bg-[#0a0a0f]/90 font-mono text-[#00ffff] hover:bg-[#00ffff]/20"
           size="sm"
         >
           {isEditMode ? (
@@ -644,7 +651,9 @@ export function DaggerheartCharacterSheet() {
                     <Input
                       id="name"
                       value={character.name}
-                      onChange={(e) => updateCharacter({ name: e.target.value })}
+                      onChange={(e) =>
+                        updateCharacter({ name: e.target.value })
+                      }
                       placeholder="Enter name"
                       className={`cyber-input font-sans placeholder:text-[#00ffff]/50 ${
                         character.name
@@ -759,308 +768,6 @@ export function DaggerheartCharacterSheet() {
           isEditMode={isEditMode}
         />
 
-        {/* OLD DEFENSE SECTION - REPLACED BY DefenseHealthCombined
-        <div className="grid grid-cols-1 gap-6 md:grid-cols-2">
-          <Card className="cyber-border bg-gradient-to-r from-[#0a0a0f]/90 to-[#1a1a2e]/90 backdrop-blur-sm">
-            <CardHeader>
-              <CardTitle className="flex items-center gap-3 font-mono tracking-wide text-[#00ffff]">
-                <Shield className="cyber-glow-magenta h-6 w-6" />
-                DEFENSES
-              </CardTitle>
-            </CardHeader>
-            <CardContent className="grid grid-cols-2 gap-4">
-              <div className="space-y-2">
-                <Label
-                  htmlFor="evasion"
-                  className="font-mono text-sm text-[#00ffff]"
-                >
-                  EVASION
-                </Label>
-                <Input
-                  id="evasion"
-                  type="number"
-                  value={character.evasion}
-                  onChange={(e) =>
-                    updateCharacter({
-                      evasion: Number.parseInt(e.target.value) || 0,
-                    })
-                  }
-                  className="cyber-input text-center font-sans text-lg"
-                />
-              </div>
-              <div className="space-y-2">
-                <Label
-                  htmlFor="armor"
-                  className="font-mono text-sm text-[#00ffff]"
-                >
-                  ARMOR
-                </Label>
-                <Input
-                  id="armor"
-                  type="number"
-                  value={character.armor}
-                  onChange={(e) =>
-                    updateCharacter({
-                      armor: Number.parseInt(e.target.value) || 0,
-                    })
-                  }
-                  className="cyber-input text-center font-sans text-lg"
-                />
-              </div>
-              <div className="space-y-2">
-                <Label
-                  htmlFor="armorSlots"
-                  className="font-mono text-sm text-[#00ffff]"
-                >
-                  ARMOR SLOTS
-                </Label>
-                <Input
-                  id="armorSlots"
-                  type="number"
-                  value={character.armorSlots}
-                  onChange={(e) =>
-                    updateCharacter({
-                      armorSlots: Number.parseInt(e.target.value) || 0,
-                    })
-                  }
-                  className="cyber-input text-center font-sans text-lg"
-                />
-              </div>
-              <div className="col-span-2 space-y-3">
-                <Label className="font-mono text-sm font-bold text-[#00ffff]">
-                  DAMAGE THRESHOLDS
-                </Label>
-                <div className="grid grid-cols-2 gap-4">
-                  <div className="space-y-2">
-                    <Label
-                      htmlFor="minorThreshold"
-                      className="font-mono text-xs text-[#ff8000]"
-                    >
-                      MINOR DAMAGE
-                    </Label>
-                    <Input
-                      id="minorThreshold"
-                      type="number"
-                      value={character.damageThresholds.minor}
-                      onChange={(e) =>
-                        updateCharacter({
-                          damageThresholds: {
-                            ...character.damageThresholds,
-                            minor: Number.parseInt(e.target.value) || 0,
-                          },
-                        })
-                      }
-                      className="cyber-input text-center font-sans text-sm"
-                    />
-                    <div className="text-center font-sans text-xs text-[#ff8000]/70">
-                      Mark 1 HP
-                    </div>
-                  </div>
-                  <div className="space-y-2">
-                    <Label
-                      htmlFor="majorThreshold"
-                      className="font-mono text-xs text-[#ff0040]"
-                    >
-                      MAJOR DAMAGE
-                    </Label>
-                    <Input
-                      id="majorThreshold"
-                      type="number"
-                      value={character.damageThresholds.major}
-                      onChange={(e) =>
-                        updateCharacter({
-                          damageThresholds: {
-                            ...character.damageThresholds,
-                            major: Number.parseInt(e.target.value) || 0,
-                          },
-                        })
-                      }
-                      className="cyber-input text-center font-sans text-sm"
-                    />
-                    <div className="text-center font-sans text-xs text-[#ff0040]/70">
-                      Mark 2 HP
-                    </div>
-                  </div>
-                </div>
-                <div className="relative h-4 overflow-hidden rounded-lg border border-[#00ffff]/30 bg-black/50">
-                  <div className="absolute inset-0 bg-gradient-to-r from-[#00ff00] via-[#ff8000] to-[#ff0040]"></div>
-                  <div className="absolute inset-0 flex items-center justify-between px-2">
-                    <span className="font-sans text-xs font-bold text-black">
-                      0
-                    </span>
-                    {character.damageThresholds.minor > 0 && (
-                      <div
-                        className="absolute top-0 bottom-0 w-0.5 bg-black"
-                        style={{
-                          left: `${Math.min((character.damageThresholds.minor / 30) * 100, 100)}%`,
-                        }}
-                      />
-                    )}
-                    {character.damageThresholds.major > 0 && (
-                      <div
-                        className="absolute top-0 bottom-0 w-0.5 bg-black"
-                        style={{
-                          left: `${Math.min((character.damageThresholds.major / 30) * 100, 100)}%`,
-                        }}
-                      />
-                    )}
-                    <span className="font-sans text-xs font-bold text-black">
-                      30+
-                    </span>
-                  </div>
-                </div>
-              </div>
-            </CardContent>
-          </Card>
-
-          <Card className="cyber-border bg-gradient-to-r from-[#0a0a0f]/90 to-[#1a1a2e]/90 backdrop-blur-sm">
-            <CardHeader>
-              <CardTitle className="flex items-center gap-3 font-mono tracking-wide text-[#00ffff]">
-                <User className="cyber-glow h-6 w-6" />
-                ANCESTRY
-              </CardTitle>
-            </CardHeader>
-            <CardContent className="space-y-4">
-              <div className="space-y-2">
-                <Label
-                  htmlFor="ancestryName"
-                  className={`font-mono text-sm font-bold ${
-                    character.ancestry.name
-                      ? "text-[#00ffff]"
-                      : "text-[#ffff00]"
-                  }`}
-                >
-                  ANCESTRY *
-                </Label>
-                <SearchableSelect
-                  id="ancestryName"
-                  value={character.ancestry.name}
-                  onChange={handleAncestryChange}
-                  options={[
-                    { value: "", label: "Select Ancestry" },
-                    {
-                      value: "Mixed ancestry",
-                      label: "Mixed ancestry",
-                      description:
-                        "Choose any top and bottom features from all ancestries",
-                    },
-                    ...DAGGERHEART_ANCESTRIES.map((ancestry) => ({
-                      value: ancestry.name,
-                      label: ancestry.name,
-                      description: ancestry.description,
-                    })),
-                  ]}
-                  placeholder="Select Ancestry"
-                  className={`bg-black/70 text-[#00ffff] ${
-                    character.ancestry.name
-                      ? "border border-[#00ffff]"
-                      : "border-2 border-[#ffff00] shadow-[0_0_10px_rgba(255,255,0,0.3)]"
-                  }`}
-                  required
-                />
-              </div>
-              {character.ancestry.name && (
-                <>
-                  <div className="space-y-2">
-                    <Label
-                      htmlFor="topFeature"
-                      className="font-mono text-sm text-[#00ffff]"
-                    >
-                      TOP FEATURE
-                    </Label>
-                    <SearchableSelect
-                      id="topFeature"
-                      value={character.ancestry.topFeature}
-                      onChange={(value) =>
-                        setCharacter((prev) => ({
-                          ...prev,
-                          ancestry: { ...prev.ancestry, topFeature: value },
-                        }))
-                      }
-                      options={[
-                        { value: "", label: "Select Top Feature" },
-                        ...(character.ancestry.name === "Mixed ancestry"
-                          ? DAGGERHEART_ANCESTRIES.map((ancestry) => ({
-                              value: ancestry.topFeature.name,
-                              label: `${ancestry.topFeature.name} (${ancestry.name})`,
-                              description: ancestry.topFeature.description,
-                            }))
-                          : DAGGERHEART_ANCESTRIES.find(
-                                (a) => a.name === character.ancestry.name
-                              )?.topFeature
-                            ? [
-                                {
-                                  value: DAGGERHEART_ANCESTRIES.find(
-                                    (a) => a.name === character.ancestry.name
-                                  )!.topFeature.name,
-                                  label: DAGGERHEART_ANCESTRIES.find(
-                                    (a) => a.name === character.ancestry.name
-                                  )!.topFeature.name,
-                                  description: DAGGERHEART_ANCESTRIES.find(
-                                    (a) => a.name === character.ancestry.name
-                                  )!.topFeature.description,
-                                },
-                              ]
-                            : []),
-                      ]}
-                      placeholder="Select Top Feature"
-                      className="border border-[#00ffff] bg-black/50 text-[#00ffff]"
-                    />
-                  </div>
-
-                  <div className="space-y-2">
-                    <Label
-                      htmlFor="bottomFeature"
-                      className="font-mono text-sm text-[#00ffff]"
-                    >
-                      BOTTOM FEATURE
-                    </Label>
-                    <SearchableSelect
-                      id="bottomFeature"
-                      value={character.ancestry.bottomFeature}
-                      onChange={(value) =>
-                        setCharacter((prev) => ({
-                          ...prev,
-                          ancestry: { ...prev.ancestry, bottomFeature: value },
-                        }))
-                      }
-                      options={[
-                        { value: "", label: "Select Bottom Feature" },
-                        ...(character.ancestry.name === "Mixed ancestry"
-                          ? DAGGERHEART_ANCESTRIES.map((ancestry) => ({
-                              value: ancestry.bottomFeature.name,
-                              label: `${ancestry.bottomFeature.name} (${ancestry.name})`,
-                              description: ancestry.bottomFeature.description,
-                            }))
-                          : DAGGERHEART_ANCESTRIES.find(
-                                (a) => a.name === character.ancestry.name
-                              )?.bottomFeature
-                            ? [
-                                {
-                                  value: DAGGERHEART_ANCESTRIES.find(
-                                    (a) => a.name === character.ancestry.name
-                                  )!.bottomFeature.name,
-                                  label: DAGGERHEART_ANCESTRIES.find(
-                                    (a) => a.name === character.ancestry.name
-                                  )!.bottomFeature.name,
-                                  description: DAGGERHEART_ANCESTRIES.find(
-                                    (a) => a.name === character.ancestry.name
-                                  )!.bottomFeature.description,
-                                },
-                              ]
-                            : []),
-                      ]}
-                      placeholder="Select Bottom Feature"
-                      className="border border-[#00ffff] bg-black/50 text-[#00ffff]"
-                    />
-                  </div>
-                </>
-              )}
-            </CardContent>
-          </Card>
-        </div>
-        END OF OLD DEFENSE SECTION */}
-
         <Card className="cyber-border bg-gradient-to-r from-[#0a0a0f]/90 to-[#1a1a2e]/90 backdrop-blur-sm">
           <CardHeader>
             <CardTitle className="flex items-center gap-3 font-mono tracking-wide text-[#00ffff]">
@@ -1071,251 +778,89 @@ export function DaggerheartCharacterSheet() {
               TRAITS
             </CardTitle>
           </CardHeader>
-          <CardContent className="overflow-x-auto">
-            <div className="grid grid-cols-3 gap-4 md:grid-cols-6 min-w-fit">
+          <CardContent>
+            <div className="grid grid-cols-2 gap-3 md:grid-cols-3 lg:grid-cols-6">
               {Object.entries(character.traits).map(([trait, value]) => (
                 <div
                   key={trait}
-                  className="relative flex flex-col items-center"
+                  className="group relative flex cursor-pointer flex-col items-center"
+                  onClick={() =>
+                    rollDualityDice(
+                      value,
+                      trait.charAt(0).toUpperCase() + trait.slice(1)
+                    )
+                  }
                 >
-                  {/* Shield/Hexagon Shape Container */}
-                  <div className="relative group">
-                    {/* Background Shape */}
-                    <div 
-                      className="relative w-32 h-36 flex flex-col items-center justify-between p-3 
-                                 bg-gradient-to-b from-black/50 to-black/30 
-                                 border-2 border-[#00ffff]/50
-                                 clip-path-[polygon(50%_0%,100%_25%,100%_75%,50%_100%,0%_75%,0%_25%)]
-                                 hover:border-[#00ffff] transition-all cursor-pointer"
-                      onClick={() =>
-                        rollDualityDice(
-                          value,
-                          trait.charAt(0).toUpperCase() + trait.slice(1)
-                        )
-                      }
-                      style={{
-                        clipPath: "polygon(50% 0%, 100% 25%, 100% 75%, 50% 100%, 0% 75%, 0% 25%)"
-                      }}
-                    >
-                      {/* Trait Name */}
-                      <div className="text-center">
-                        <div className="font-mono text-xs font-bold tracking-wider text-white uppercase">
-                          {trait}
-                        </div>
-                      </div>
+                  {/* Vertical side bars */}
+                  <div className="absolute top-8 bottom-8 left-0 w-0.5 bg-[#00ffff]/30" />
+                  <div className="absolute top-8 right-0 bottom-8 w-0.5 bg-[#00ffff]/30" />
 
-                      {/* Trait Value */}
-                      <div className="flex items-center justify-center flex-1">
-                        <span className="cyber-text font-sans text-3xl font-bold text-[#00ffff]">
-                          {value >= 0 ? `+${value}` : value}
-                        </span>
-                      </div>
-
-                      {/* Trait Description */}
-                      <div className="text-center">
-                        <div className="font-sans text-[10px] text-[#00ffff]/60 leading-tight">
-                          {TRAIT_DESCRIPTIONS[trait as keyof typeof TRAIT_DESCRIPTIONS]}
-                        </div>
+                  {/* Trait container */}
+                  <div className="relative flex h-32 w-full flex-col items-center justify-between bg-gradient-to-b from-black/20 to-black/40 px-4 py-3 transition-all hover:from-black/30 hover:to-black/50">
+                    {/* Trait Name */}
+                    <div className="text-center">
+                      <div className="font-mono text-xs font-bold tracking-wider text-[#00ffff] uppercase">
+                        {trait}
                       </div>
                     </div>
 
-                    {/* Edit Mode Controls */}
-                    {isEditMode && (
-                      <div className="absolute -bottom-2 left-0 right-0 flex items-center justify-center gap-1 opacity-0 group-hover:opacity-100 transition-opacity">
-                        <Button
-                          variant="outline"
-                          size="sm"
-                          onClick={(e) => {
-                            e.stopPropagation()
-                            updateTrait(
-                              trait as keyof CharacterData["traits"],
-                              value - 1
-                            )
-                          }}
-                          className="cyber-button h-6 w-6 p-0"
-                        >
-                          <Minus className="h-3 w-3 text-[#00ffff]" />
-                        </Button>
-                        <Button
-                          variant="outline"
-                          size="sm"
-                          onClick={(e) => {
-                            e.stopPropagation()
-                            updateTrait(
-                              trait as keyof CharacterData["traits"],
-                              value + 1
-                            )
-                          }}
-                          className="cyber-button h-6 w-6 p-0"
-                        >
-                          <Plus className="h-3 w-3 text-[#00ffff]" />
-                        </Button>
+                    {/* Trait Value */}
+                    <div className="flex flex-1 items-center justify-center">
+                      <span className="cyber-text font-sans text-4xl font-bold text-[#00ffff]">
+                        {value >= 0 ? `+${value}` : value}
+                      </span>
+                    </div>
+
+                    {/* Trait Description */}
+                    <div className="px-2 text-center">
+                      <div className="font-sans text-[10px] leading-tight text-[#00ffff]/60">
+                        {
+                          TRAIT_DESCRIPTIONS[
+                            trait as keyof typeof TRAIT_DESCRIPTIONS
+                          ]
+                        }
                       </div>
-                    )}
+                    </div>
                   </div>
+
+                  {/* Edit Mode Controls */}
+                  {isEditMode && (
+                    <div className="absolute right-0 -bottom-8 left-0 z-10 flex items-center justify-center gap-1 opacity-0 transition-opacity group-hover:opacity-100">
+                      <Button
+                        variant="outline"
+                        size="sm"
+                        onClick={(e) => {
+                          e.stopPropagation()
+                          updateTrait(
+                            trait as keyof CharacterData["traits"],
+                            value - 1
+                          )
+                        }}
+                        className="cyber-button h-6 w-6 bg-black/80 p-0"
+                      >
+                        <Minus className="h-3 w-3 text-[#00ffff]" />
+                      </Button>
+                      <Button
+                        variant="outline"
+                        size="sm"
+                        onClick={(e) => {
+                          e.stopPropagation()
+                          updateTrait(
+                            trait as keyof CharacterData["traits"],
+                            value + 1
+                          )
+                        }}
+                        className="cyber-button h-6 w-6 bg-black/80 p-0"
+                      >
+                        <Plus className="h-3 w-3 text-[#00ffff]" />
+                      </Button>
+                    </div>
+                  )}
                 </div>
               ))}
             </div>
           </CardContent>
         </Card>
-
-        {/* OLD HP/STRESS CARDS - REPLACED BY DefenseHealthCombined
-        <div className="grid grid-cols-1 gap-6 md:grid-cols-2">
-          <Card className="cyber-border bg-gradient-to-b from-[#0a0a0f]/90 to-[#1a1a2e]/90 backdrop-blur-sm">
-            <CardHeader>
-              <CardTitle className="flex items-center justify-between font-mono tracking-wide text-[#ff0040]">
-                <div className="flex items-center gap-3">
-                  <Heart
-                    className="h-6 w-6"
-                    style={{ filter: "drop-shadow(0 0 8px #ff0040)" }}
-                  />
-                  HP
-                </div>
-                <div className="h-2 w-32 overflow-hidden rounded-full bg-black/50">
-                  <div
-                    className="health-bar h-full transition-all duration-300"
-                    style={{
-                      width: `${(character.hp.current / character.hp.max) * 100}%`,
-                    }}
-                  />
-                </div>
-              </CardTitle>
-            </CardHeader>
-            <CardContent>
-              <div className="flex items-center justify-center gap-3">
-                <Button
-                  variant="outline"
-                  size="sm"
-                  onClick={() => updateHP(character.hp.current - 1)}
-                  className="cyber-button h-8 w-8 p-0"
-                >
-                  <Minus className="h-4 w-4 text-[#ff0040]" />
-                </Button>
-                {isEditMode ? (
-                  <div className="group relative">
-                    <span className="cyber-text cursor-pointer font-sans text-2xl text-[#ff0040] transition-opacity group-hover:opacity-0">
-                      {character.hp.current} / {character.hp.max}
-                    </span>
-                    <div className="pointer-events-none absolute inset-0 flex items-center justify-center opacity-0 transition-opacity group-hover:pointer-events-auto group-hover:opacity-100">
-                      <input
-                        type="number"
-                        value={character.hp.current}
-                        onChange={(e) =>
-                          updateHP(Number.parseInt(e.target.value) || 0)
-                        }
-                        className="w-12 rounded border border-[#ff0040] bg-black/70 px-1 text-center text-sm text-[#ff0040]"
-                        onClick={(e) => e.stopPropagation()}
-                      />
-                      <span className="mx-1 text-[#ff0040]">/</span>
-                      <input
-                        type="number"
-                        value={character.hp.max}
-                        onChange={(e) =>
-                          setCharacter((prev) => ({
-                            ...prev,
-                            hp: {
-                              ...prev.hp,
-                              max: Number.parseInt(e.target.value) || 1,
-                            },
-                          }))
-                        }
-                        className="w-12 rounded border border-[#ff0040] bg-black/70 px-1 text-center text-sm text-[#ff0040]"
-                        onClick={(e) => e.stopPropagation()}
-                      />
-                    </div>
-                  </div>
-                ) : (
-                  <span className="cyber-text font-sans text-2xl text-[#ff0040]">
-                    {character.hp.current} / {character.hp.max}
-                  </span>
-                )}
-                <Button
-                  variant="outline"
-                  size="sm"
-                  onClick={() => updateHP(character.hp.current + 1)}
-                  className="cyber-button h-8 w-8 p-0"
-                >
-                  <Plus className="h-4 w-4 text-[#ff0040]" />
-                </Button>
-              </div>
-            </CardContent>
-          </Card>
-
-          <Card className="cyber-border bg-gradient-to-b from-[#0a0a0f]/90 to-[#1a1a2e]/90 backdrop-blur-sm">
-            <CardHeader>
-              <CardTitle className="flex items-center justify-between font-mono tracking-wide text-[#ff8000]">
-                <div className="flex items-center gap-3">
-                  <Activity
-                    className="h-6 w-6"
-                    style={{ filter: "drop-shadow(0 0 8px #ff8000)" }}
-                  />
-                  STRESS
-                </div>
-                <div className="h-2 w-32 overflow-hidden rounded-full bg-black/50">
-                  <div
-                    className="stress-bar h-full transition-all duration-300"
-                    style={{
-                      width: `${(character.stress.current / character.stress.max) * 100}%`,
-                    }}
-                  />
-                </div>
-              </CardTitle>
-            </CardHeader>
-            <CardContent>
-              <div className="flex items-center justify-center gap-3">
-                <Button
-                  variant="outline"
-                  size="sm"
-                  onClick={() => updateStress(character.stress.current - 1)}
-                  className="cyber-button h-8 w-8 p-0"
-                >
-                  <Minus className="h-4 w-4 text-[#ff8000]" />
-                </Button>
-                <div className="group relative">
-                  <span className="cyber-text cursor-pointer font-sans text-2xl text-[#ff8000] transition-opacity group-hover:opacity-0">
-                    {character.stress.current} / {character.stress.max}
-                  </span>
-                  <div className="pointer-events-none absolute inset-0 flex items-center justify-center opacity-0 transition-opacity group-hover:pointer-events-auto group-hover:opacity-100">
-                    <input
-                      type="number"
-                      value={character.stress.current}
-                      onChange={(e) =>
-                        updateStress(Number.parseInt(e.target.value) || 0)
-                      }
-                      className="w-12 rounded border border-[#ff8000] bg-black/70 px-1 text-center text-sm text-[#ff8000]"
-                      onClick={(e) => e.stopPropagation()}
-                    />
-                    <span className="mx-1 text-[#ff8000]">/</span>
-                    <input
-                      type="number"
-                      value={character.stress.max}
-                      onChange={(e) =>
-                        setCharacter((prev) => ({
-                          ...prev,
-                          stress: {
-                            ...prev.stress,
-                            max: Number.parseInt(e.target.value) || 1,
-                          },
-                        }))
-                      }
-                      className="w-12 rounded border border-[#ff8000] bg-black/70 px-1 text-center text-sm text-[#ff8000]"
-                      onClick={(e) => e.stopPropagation()}
-                    />
-                  </div>
-                </div>
-                <Button
-                  variant="outline"
-                  size="sm"
-                  onClick={() => updateStress(character.stress.current + 1)}
-                  className="cyber-button h-8 w-8 p-0"
-                >
-                  <Plus className="h-4 w-4 text-[#ff8000]" />
-                </Button>
-              </div>
-            </CardContent>
-          </Card>
-        </div>
-        END OF OLD HP/STRESS CARDS */}
 
         <Card className="cyber-border bg-gradient-to-b from-[#0a0a0f]/90 to-[#1a1a2e]/90 backdrop-blur-sm">
           <CardHeader>
@@ -1324,38 +869,30 @@ export function DaggerheartCharacterSheet() {
             </CardTitle>
           </CardHeader>
           <CardContent className="space-y-4">
-            <div className="flex items-center justify-center gap-3">
-              <Button
-                variant="outline"
-                size="sm"
-                onClick={() => updateHope(character.hope - 1)}
-                className="cyber-button h-8 w-8 p-0"
-              >
-                <Minus className="h-4 w-4 text-[#ffff00]" />
-              </Button>
-              <span className="cyber-text font-sans text-2xl text-[#ffff00]">
-                {character.hope} / 6
-              </span>
-              <Button
-                variant="outline"
-                size="sm"
-                onClick={() => updateHope(character.hope + 1)}
-                className="cyber-button h-8 w-8 p-0"
-              >
-                <Plus className="h-4 w-4 text-[#ffff00]" />
-              </Button>
-            </div>
-            <div className="flex justify-center gap-2">
-              {Array.from({ length: 6 }, (_, i) => (
-                <div
-                  key={i}
-                  className={`h-8 w-8 rounded-full border-2 transition-all duration-300 ${
-                    i < character.hope
-                      ? "hope-dot border-[#ffff00]"
-                      : "hope-dot-empty"
-                  }`}
-                />
-              ))}
+            {/* Hope Pips */}
+            <div>
+              <div className="mb-2 flex items-center justify-between">
+                <span className="text-xs text-[#ffff00]">HOPE</span>
+                <span className="text-xs text-[#ffff00]/70">
+                  {character.hope}/6
+                </span>
+              </div>
+              <div className="flex justify-center gap-2">
+                {Array.from({ length: 6 }, (_, i) => {
+                  const isFilled = i < character.hope
+                  return (
+                    <div
+                      key={i}
+                      onClick={() => updateHope(i + 1)}
+                      className={`h-10 w-10 cursor-pointer rounded-full border-2 transition-all ${
+                        isFilled
+                          ? "hope-dot border-[#ffff00] hover:opacity-80"
+                          : "hope-dot-empty hover:bg-[#ffff00]/20"
+                      }`}
+                    />
+                  )
+                })}
+              </div>
             </div>
 
             {/* Class-specific Hope Feature */}
@@ -1498,7 +1035,7 @@ export function DaggerheartCharacterSheet() {
                       size="sm"
                       onClick={() => rollDamageDice(weapon.damage, weapon.name)}
                       className="cyber-button flex-1 font-sans text-[#ff0040]"
-                      title={`Roll damage ${weapon.damage}`}
+                      title={`Roll damage: ${getCharacterTier(character.level)}${weapon.damage.match(/d\d+/)?.[0] || weapon.damage} (Tier ${getCharacterTier(character.level)})`}
                     >
                       DAMAGE
                     </Button>

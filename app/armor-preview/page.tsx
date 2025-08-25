@@ -55,89 +55,97 @@ export default function ArmorPreviewPage() {
               TEST VALUES
             </CardTitle>
           </CardHeader>
-                      <CardContent className="grid grid-cols-2 gap-4 md:grid-cols-4 lg:grid-cols-7">
-              <div>
-                <Label className="text-xs text-[#00ffff]">Max Armor</Label>
+          <CardContent className="grid grid-cols-2 gap-4 md:grid-cols-4 lg:grid-cols-7">
+            <div>
+              <Label className="text-xs text-[#00ffff]">Max Armor</Label>
+              <Input
+                type="number"
+                value={maxArmor}
+                onChange={(e) => setMaxArmor(Number(e.target.value))}
+                className="cyber-input"
+              />
+            </div>
+            <div>
+              <Label className="text-xs text-[#00ffff]">Current Armor</Label>
+              <Input
+                type="number"
+                value={currentArmor}
+                onChange={(e) =>
+                  setCurrentArmor(Math.min(Number(e.target.value), maxArmor))
+                }
+                className="cyber-input"
+              />
+            </div>
+            <div>
+              <Label className="text-xs text-[#00ffff]">Evasion</Label>
+              <Input
+                type="number"
+                value={evasion}
+                onChange={(e) => setEvasion(Number(e.target.value))}
+                className="cyber-input"
+              />
+            </div>
+            <div>
+              <Label className="text-xs text-[#00ffff]">Minor Threshold</Label>
+              <Input
+                type="number"
+                value={minorThreshold}
+                onChange={(e) => setMinorThreshold(Number(e.target.value))}
+                className="cyber-input"
+              />
+            </div>
+            <div>
+              <Label className="text-xs text-[#00ffff]">Major Threshold</Label>
+              <Input
+                type="number"
+                value={majorThreshold}
+                onChange={(e) => setMajorThreshold(Number(e.target.value))}
+                className="cyber-input"
+              />
+            </div>
+            <div>
+              <Label className="text-xs text-[#ff0040]">HP (current/max)</Label>
+              <div className="flex gap-1">
                 <Input
                   type="number"
-                  value={maxArmor}
-                  onChange={(e) => setMaxArmor(Number(e.target.value))}
-                  className="cyber-input"
-                />
-              </div>
-              <div>
-                <Label className="text-xs text-[#00ffff]">Current Armor</Label>
-                <Input
-                  type="number"
-                  value={currentArmor}
+                  value={currentHP}
                   onChange={(e) =>
-                    setCurrentArmor(Math.min(Number(e.target.value), maxArmor))
+                    setCurrentHP(Math.min(Number(e.target.value), maxHP))
                   }
                   className="cyber-input"
                 />
-              </div>
-              <div>
-                <Label className="text-xs text-[#00ffff]">Evasion</Label>
                 <Input
                   type="number"
-                  value={evasion}
-                  onChange={(e) => setEvasion(Number(e.target.value))}
+                  value={maxHP}
+                  onChange={(e) => setMaxHP(Number(e.target.value))}
                   className="cyber-input"
                 />
               </div>
-              <div>
-                <Label className="text-xs text-[#00ffff]">Minor Threshold</Label>
+            </div>
+            <div>
+              <Label className="text-xs text-[#ff8000]">
+                Stress (current/max)
+              </Label>
+              <div className="flex gap-1">
                 <Input
                   type="number"
-                  value={minorThreshold}
-                  onChange={(e) => setMinorThreshold(Number(e.target.value))}
+                  value={currentStress}
+                  onChange={(e) =>
+                    setCurrentStress(
+                      Math.min(Number(e.target.value), maxStress)
+                    )
+                  }
+                  className="cyber-input"
+                />
+                <Input
+                  type="number"
+                  value={maxStress}
+                  onChange={(e) => setMaxStress(Number(e.target.value))}
                   className="cyber-input"
                 />
               </div>
-              <div>
-                <Label className="text-xs text-[#00ffff]">Major Threshold</Label>
-                <Input
-                  type="number"
-                  value={majorThreshold}
-                  onChange={(e) => setMajorThreshold(Number(e.target.value))}
-                  className="cyber-input"
-                />
-              </div>
-              <div>
-                <Label className="text-xs text-[#ff0040]">HP (current/max)</Label>
-                <div className="flex gap-1">
-                  <Input
-                    type="number"
-                    value={currentHP}
-                    onChange={(e) => setCurrentHP(Math.min(Number(e.target.value), maxHP))}
-                    className="cyber-input"
-                  />
-                  <Input
-                    type="number"
-                    value={maxHP}
-                    onChange={(e) => setMaxHP(Number(e.target.value))}
-                    className="cyber-input"
-                  />
-                </div>
-              </div>
-              <div>
-                <Label className="text-xs text-[#ff8000]">Stress (current/max)</Label>
-                <div className="flex gap-1">
-                  <Input
-                    type="number"
-                    value={currentStress}
-                    onChange={(e) => setCurrentStress(Math.min(Number(e.target.value), maxStress))}
-                    className="cyber-input"
-                  />
-                  <Input
-                    type="number"
-                    value={maxStress}
-                    onChange={(e) => setMaxStress(Number(e.target.value))}
-                    className="cyber-input"
-                  />
-                </div>
-              </div>
-            </CardContent>
+            </div>
+          </CardContent>
         </Card>
 
         {/* Design Options */}
@@ -153,41 +161,55 @@ export default function ArmorPreviewPage() {
               <div className="space-y-6">
                 {/* Defense Section */}
                 <div className="cyber-border rounded-lg bg-black/30 p-6">
-                  <h4 className="mb-4 font-mono text-sm text-[#ff00ff]">DEFENSES</h4>
-                  <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                  <h4 className="mb-4 font-mono text-sm text-[#ff00ff]">
+                    DEFENSES
+                  </h4>
+                  <div className="grid grid-cols-1 gap-6 md:grid-cols-2">
                     {/* Evasion & Armor */}
                     <div className="flex items-center gap-8">
                       <div className="text-center">
-                        <div className="mb-2 text-xs text-[#ff00ff]/70">EVASION</div>
-                        <div className="cyber-text text-4xl font-bold text-[#ff00ff]">{evasion}</div>
+                        <div className="mb-2 text-xs text-[#ff00ff]/70">
+                          EVASION
+                        </div>
+                        <div className="cyber-text text-4xl font-bold text-[#ff00ff]">
+                          {evasion}
+                        </div>
                       </div>
                       <div className="space-y-2">
                         <div className="flex items-center gap-2">
-                          <span className="text-xs text-[#00ffff]/70">ARMOR</span>
-                          <span className="text-sm font-bold text-[#00ffff]">{currentArmor}/{maxArmor}</span>
+                          <span className="text-xs text-[#00ffff]/70">
+                            ARMOR
+                          </span>
+                          <span className="text-sm font-bold text-[#00ffff]">
+                            {currentArmor}/{maxArmor}
+                          </span>
                         </div>
                         <div className="flex justify-center gap-2">
-                          {Array.from({ length: Math.max(5, maxArmor) }, (_, i) => {
-                            const isActive = i < currentArmor;
-                            const exists = i < maxArmor;
-                            if (!exists) return <div key={i} className="w-10 h-10" />;
-                            return (
-                              <div key={i} className="relative">
-                                <Shield
-                                  className={`h-10 w-10 transition-all ${
-                                    isActive
-                                      ? "text-[#00ffff] drop-shadow-[0_0_6px_rgba(0,255,255,0.8)]"
-                                      : "text-gray-600"
-                                  }`}
-                                />
-                                {!isActive && (
-                                  <div className="absolute inset-0 flex items-center justify-center">
-                                    <X className="h-6 w-6 text-red-500" />
-                                  </div>
-                                )}
-                              </div>
-                            );
-                          })}
+                          {Array.from(
+                            { length: Math.max(5, maxArmor) },
+                            (_, i) => {
+                              const isActive = i < currentArmor
+                              const exists = i < maxArmor
+                              if (!exists)
+                                return <div key={i} className="h-10 w-10" />
+                              return (
+                                <div key={i} className="relative">
+                                  <Shield
+                                    className={`h-10 w-10 transition-all ${
+                                      isActive
+                                        ? "text-[#00ffff] drop-shadow-[0_0_6px_rgba(0,255,255,0.8)]"
+                                        : "text-gray-600"
+                                    }`}
+                                  />
+                                  {!isActive && (
+                                    <div className="absolute inset-0 flex items-center justify-center">
+                                      <X className="h-6 w-6 text-red-500" />
+                                    </div>
+                                  )}
+                                </div>
+                              )
+                            }
+                          )}
                         </div>
                       </div>
                     </div>
@@ -198,7 +220,9 @@ export default function ArmorPreviewPage() {
                       <div>
                         <div className="mb-2 flex items-center justify-between">
                           <span className="text-xs text-[#ff0040]">HP</span>
-                          <span className="text-xs text-[#ff0040]/70">{currentHP}/{maxHP}</span>
+                          <span className="text-xs text-[#ff0040]/70">
+                            {currentHP}/{maxHP}
+                          </span>
                         </div>
                         <div className="grid grid-cols-12 gap-1">
                           {Array.from({ length: 12 }, (_, i) => (
@@ -208,8 +232,8 @@ export default function ArmorPreviewPage() {
                                 i < currentHP
                                   ? "border-[#ff0040] bg-[#ff0040]"
                                   : i < maxHP
-                                  ? "border-[#ff0040] bg-transparent"
-                                  : "border-gray-600 bg-transparent"
+                                    ? "border-[#ff0040] bg-transparent"
+                                    : "border-gray-600 bg-transparent"
                               }`}
                             />
                           ))}
@@ -220,7 +244,9 @@ export default function ArmorPreviewPage() {
                       <div>
                         <div className="mb-2 flex items-center justify-between">
                           <span className="text-xs text-[#ff8000]">STRESS</span>
-                          <span className="text-xs text-[#ff8000]/70">{currentStress}/{maxStress}</span>
+                          <span className="text-xs text-[#ff8000]/70">
+                            {currentStress}/{maxStress}
+                          </span>
                         </div>
                         <div className="grid grid-cols-12 gap-1">
                           {Array.from({ length: 12 }, (_, i) => (
@@ -230,8 +256,8 @@ export default function ArmorPreviewPage() {
                                 i < currentStress
                                   ? "border-[#ff8000] bg-[#ff8000]"
                                   : i < maxStress
-                                  ? "border-[#ff8000] bg-transparent"
-                                  : "border-gray-600 bg-transparent"
+                                    ? "border-[#ff8000] bg-transparent"
+                                    : "border-gray-600 bg-transparent"
                               }`}
                             />
                           ))}
@@ -250,19 +276,37 @@ export default function ArmorPreviewPage() {
                     <div className="h-16 overflow-hidden rounded-lg border border-[#00ffff]/30 bg-black/50">
                       <div className="flex h-full">
                         <div className="flex flex-1 flex-col items-center justify-center border-r-2 border-orange-500 bg-gradient-to-r from-yellow-500/20 to-yellow-500/30">
-                          <span className="text-xs font-bold text-yellow-400">MINOR</span>
-                          <span className="text-xs text-yellow-400">1-{minorThreshold - 1}</span>
-                          <span className="text-sm font-bold text-white">Mark 1 HP</span>
+                          <span className="text-xs font-bold text-yellow-400">
+                            MINOR
+                          </span>
+                          <span className="text-xs text-yellow-400">
+                            1-{minorThreshold - 1}
+                          </span>
+                          <span className="text-sm font-bold text-white">
+                            Mark 1 HP
+                          </span>
                         </div>
                         <div className="flex flex-1 flex-col items-center justify-center border-r-2 border-red-500 bg-gradient-to-r from-orange-500/20 to-orange-500/30">
-                          <span className="text-xs font-bold text-orange-400">MAJOR</span>
-                          <span className="text-xs text-orange-400">{minorThreshold}-{majorThreshold - 1}</span>
-                          <span className="text-sm font-bold text-white">Mark 2 HP</span>
+                          <span className="text-xs font-bold text-orange-400">
+                            MAJOR
+                          </span>
+                          <span className="text-xs text-orange-400">
+                            {minorThreshold}-{majorThreshold - 1}
+                          </span>
+                          <span className="text-sm font-bold text-white">
+                            Mark 2 HP
+                          </span>
                         </div>
                         <div className="flex flex-1 flex-col items-center justify-center bg-gradient-to-r from-red-500/20 to-red-700/30">
-                          <span className="text-xs font-bold text-red-500">SEVERE</span>
-                          <span className="text-xs text-red-500">{majorThreshold}+</span>
-                          <span className="text-sm font-bold text-white">Mark 3 HP</span>
+                          <span className="text-xs font-bold text-red-500">
+                            SEVERE
+                          </span>
+                          <span className="text-xs text-red-500">
+                            {majorThreshold}+
+                          </span>
+                          <span className="text-sm font-bold text-white">
+                            Mark 3 HP
+                          </span>
                         </div>
                       </div>
                     </div>
